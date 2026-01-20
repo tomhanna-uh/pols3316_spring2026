@@ -82,7 +82,7 @@ With the working directory set, we're ready to actually load the data. The next 
 + Create a new *object* called "cars_data". 
 + Assign something to the object using the *assignment operator*
 
-![assignment operator](assignment_operator.png)
+![assignment operator](assets/assignment_operator.png)
 
 (Image from: https://shansabri.github.io/post/post1/)
 
