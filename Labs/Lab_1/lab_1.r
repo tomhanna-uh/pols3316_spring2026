@@ -29,12 +29,12 @@ combined_matrix3 <- rbind(combined_matrix, fourth_vector)
 # The final output will be a matrix with three rows and five columns
 
 
-print(combined_matrix3)
+combined_matrix3
 
 # Now I want to turn this matrix into one of the basic objects in R, a data frame
 
 my_data <- data.frame(combined_matrix3)
-print(my_data)
+my_data
 
 # Finally, I will save this data frame to a CSV file in the data folder using the write.csv() function
 
@@ -65,7 +65,7 @@ median_second_vector
 means <- apply(my_data, 1, mean)
 medians <- apply(my_data, 1, median)
 stats_table <- data.frame(Means = means, Medians = medians)
-print(stats_table)
+stats_table
 
 # That apply function is very useful for applying a function to rows or columns of a data frame or matrix
 # But how do you use it?
@@ -94,7 +94,7 @@ mean_first
 # in our data frame, which is actually a lot more common
 
 column_means <- apply(my_data, 2, mean)
-print(column_means)
+column_means
 
 # The third **argument** is the **function** to apply
 
@@ -105,7 +105,7 @@ print(column_means)
 # Let's use apply to find the median of each column
 
 column_medians <- apply(my_data, 2, median)
-print(column_medians)
+column_medians
 
 # at this point, you may have noticed that something doesn't look quite right
 # our data frame put our vectors (our lists of variable observations) 
@@ -117,20 +117,20 @@ print(column_medians)
 # using the cbind() function
 
 combined_matrix_columns <- cbind(first_vector, second_vector, fourth_vector)
-print(combined_matrix_columns)
+combined_matrix_columns
 
 # Now I want to turn this matrix into one of the basic objects in R, a data frame
 
 my_data_columns <- data.frame(combined_matrix_columns)
-print(my_data_columns)
+my_data_columns
 
 # Finally, I want to use apply to find the means and medians of each column in this new data frame
 
 column_means_columns <- apply(my_data_columns, 2, mean)
-print(column_means_columns)
+column_means_columns
 
 column_medians_columns <- apply(my_data_columns, 2, median)
-print(column_medians_columns)
+column_medians_columns
 
 # I am going to save this data frame to a CSV file in the data folder using the write.csv() function
 

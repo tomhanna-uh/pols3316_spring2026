@@ -1,0 +1,166 @@
+---
+title: "Lab 1 Document"
+format: docx
+---
+
+## Create Some Data and Organize It
+
+1. First we will add some data creating 2 **vectors** using the c() function
+
+         first_vector <- c(1, 2, 3, 4, 5)
+         second_vector <- c(6, 7, 8, 9, 10)
+         
+A **vector** is defined as:  basic one-dimensional data structure that holds an ordered collection of elements, all of the same type (e.g., all numeric, all character, or all logical)
+
+We can print any object to the console by entering its name. There is a print() function as well, but it is not necessary for simple printing.
+
+         first_vector
+         second_vector
+
+2. Next we will combine these two vectors into a **matrix** using the rbind() function
+
+A **matrix** is defined as:  a two-dimensional rectangular data structure that organizes data into rows and columns, where each element is of the same type (e.g., all numeric, all character, or all logical)
+
+        combined_matrix <- rbind(first_vector, second_vector)
+
+3. Now I am going to purposely create an error so you can see how error handling works in R
+
+        third_vector <- c(11, 12, 13)  # This vector has a different length
+
+4. Attempt to combine the third vector with the existing matrix
+
+        combined_matrix2 <- rbind(combined_matrix, third_vector)
+
+The above line will produce an error because the lengths of the vectors do not match.
+
+5. To fix this, we need to ensure that all vectors have the same length before combining them into a matrix.
+
+        fourth_vector <- c(11, 12, 13, 14, 15)  # Now this vector has the same length
+
+6. Now we can successfully combine all three vectors into a matrix
+
+        combined_matrix3 <- rbind(combined_matrix, fourth_vector)
+
+7. Print the final combined matrix
+The final output will be a matrix with three rows and five columns
+
+
+        combined_matrix3
+
+8. Now we want to turn this matrix into one of the basic objects in R, a **dataframe**
+
+my_data <- data.frame(combined_matrix3)
+print(my_data)
+
+A **dataframe** is defined as: a data frame is a 2‑dimensional, tabular data structure where each column is a vector (or factor) of the same length, and different columns can have different types (numeric, character, logical, etc.)
+
+9. Finally, we will save this dataframe to a CSV file in the data folder using the write.csv() function
+
+write.csv(my_data, file = "data/my_data.csv", row.names = TRUE)  # This will create a file named my_data.csv in the data directory with row names
+
+
+## Operations on Data
+
+Now that we have some data, let's do some basic statistical operations on it
+
+1. We can find the mean of the first vector a couple of ways one is to use the sum function and the length function
+
+        mean_first_vector <- sum(first_vector) / length(first_vector)
+
+        mean_first_vector
+
+2. another way is to use the built-in mean function
+
+        mean_first_vector2 <- mean(first_vector)
+        mean_first_vector2
+
+3. we can also find the median of the second vector using the median function
+
+        median_second_vector <- median(second_vector)
+        median_second_vector
+
+4. We can also create a table of the means and medians for each row in the data frame using the apply() function
+
+        means <- apply(my_data, 1, mean)
+        medians <- apply(my_data, 1, median)
+        stats_table <- data.frame(Means = means, Medians = medians)
+        stats_table
+
+
+5. The apply function is very useful for applying a function to rows or columns of a data frame or matrix
+
+But how do you use it?
+
+The easiest way to find out is with the built in help function: ?
+
+        ?apply 
+
+The first **argument** is the **object**, you want to operate on **array**, **matrix** or **vector**
+
+An **argument** is defined as:  a value or reference passed to a function when it is called, which the function uses to perform its operations.
+
+**Array** is defined as:  multi-dimensional generalizations of vectors and matrices, storing elements of a single homogeneous type (all numeric, all character, etc.) across 1+ dimensions.
+
+*Be careful later*: If you use apply on a dataframe with different **data types**, it will first convert it to a matrix, which may change the data types of the columns. **Data types** are defined as:  classifications that define the nature of data, such as numeric, character (alphabetic), logical (true-false), factor (categorical variables), etc.
+
+
+6. Instead of using apply over my_data, we could just use it for one of our vectors
+
+        mean_first <- apply(matrix(first_vector, nrow=1), 1, mean)
+        mean_first
+
+That is not very useful, because it is easier to just use the mean function directly on the vector but it is good to understand how apply works.
+
+The second **argument** is the **margin** which tells R whether to apply the function to rows or columns
+
+A margin of 1 means rows
+A margin of 2 means columns
+
+7. So, we could also use apply to find the means of the columns in our data frame, which is actually a lot more common
+
+        column_means <- apply(my_data, 2, mean)
+        print(column_means)
+
+The third **argument** is the **function** to apply
+
+A **function** is defined as:  a reusable block of code that performs a specific task, takes inputs (arguments), and returns an output.
+
+In our case, we used the mean function
+
+You can also use other functions, like sum, median, sd, or an incredible number of other functions.
+
+8. Let's use apply to find the median of each column
+
+        column_medians <- apply(my_data, 2, median)
+        print(column_medians)
+
+At this point, you may have noticed that something doesn't look quite right. Our data frame put our vectors (our lists of variable observations) into rows instead of columns.
+
+This is because we used rbind() to combine our vectors into a matrix.
+
+9. Instead let's combine these two vectors into a matrix where each vector is a column instead of a row using the cbind() function
+
+
+        combined_matrix_columns <- cbind(first_vector, second_vector,         fourth_vector)
+        print(combined_matrix_columns)
+
+10. Now we want to turn this matrix into one of the basic objects in R, a data frame
+
+        my_data_columns <- data.frame(combined_matrix_columns)
+        print(my_data_columns)
+
+11. Finally, I want to use apply to find the means and medians of each column in this new data frame
+
+        column_means_columns <- apply(my_data_columns, 2, mean)
+print(column_means_columns)
+
+        column_medians_columns <- apply(my_data_columns, 2, median)
+print(column_medians_columns)
+
+12. I am going to save this data frame to a CSV file in the data folder using the write.csv() function
+
+        write.csv(my_data_columns, file = "data/my_data_columns.csv",            row.names = FALSE)  # This will create a file named                      my_data_columns.csv in the data directory without row names
+
+We will load this data next time and do some more operations with this same data including creating row names, naming the columns with colnames() function, plotting the data, and finding the next two descriptive statistics: variance and standard deviation.
+
+
