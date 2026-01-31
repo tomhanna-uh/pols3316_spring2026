@@ -1,0 +1,426 @@
+---
+title: 'Lecture 3: Measures of Dispersion'
+date: today
+author: "POLS3316, Instructor: Tom Hanna, Spring 2025, University of Houston"
+format: 
+        html:
+                theme: cosmo
+                style: custom.css
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                theme: ../assets/custom.scss
+                slide-number: true
+                preview-links: true 
+                logo: ../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna" 
+        pdf: 
+            toc: true
+            toc-depth: 2
+            toc-location: left
+            number-sections: true
+            fig_caption: true
+---
+
+## Last class
+
+- Measures of Central Tendency
+        
+        - Mean
+        - Median
+        - Mode
+
+- These tell us about the center of the data
+- They help us start to the visualize the data based on the typical or average value
+
+## Today
+
+- Measures of Dispersion (Variation or Spread)
+
+        - Variance
+        - Standard Deviation
+        - Range
+        - Quartiles
+
+<!-- ## Measures of Dispersion (Variation or Spread) -->
+
+<!-- We will look at some sample data -->
+
+<!--         - Sample data from the USArrests data in R, specifically the data on arrests for assault and percent urban population.  -->
+<!--         - State level data -->
+<!--         - 50 observations -->
+<!--         - In this code, I specify that I only want columns 2 and 3 with [2:3] -->
+
+<!-- R Code for reference  -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- #Create an object named arrests data -->
+<!-- #assign with the left assignment operator -->
+<!-- #built in R dataset USArrests columns 2 and 3 [2:3] -->
+<!-- arrests_data <- USArrests[2:3] -->
+
+<!-- ``` -->
+
+
+<!-- ## Look at the data -->
+
+<!-- The **head** of the dataframe, the first six rows of data: -->
+
+<!-- ```{r echo=TRUE} -->
+
+<!-- #get the first 6 rows of the data -->
+<!-- head(arrests_data) -->
+
+<!-- ``` -->
+<!-- ## Find the Center (Mean) -->
+
+<!-- - Finding the mean is the first step -->
+<!-- - We need to know the center to find the spread around the center -->
+<!-- - mean is part of the formula for *variance* -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- #get the mean for both variables and store the means in objects -->
+<!-- mean_assault_arrests <- mean(arrests_data$Assault) -->
+<!-- mean_urban_population <- mean(arrests_data$UrbanPop) -->
+
+<!-- #print the means to the screen -->
+<!-- mean_assault_arrests -->
+<!-- mean_urban_population -->
+<!-- ``` -->
+
+<!-- ## Find the Center (Median) -->
+
+
+<!-- - Why? We want to know if the data is skewed -->
+
+
+<!-- ```{r echo=TRUE} -->
+
+<!-- #get the medians and store as objects -->
+<!-- median_assault_arrests <- median(arrests_data$Assault) -->
+<!-- median_urban_population <- median(arrests_data$UrbanPop) -->
+
+<!-- #return the values to the screen -->
+<!-- cat('Median Assault Arrests') -->
+<!-- median_assault_arrests -->
+
+<!-- cat('Median Urban Population') -->
+<!-- median_urban_population -->
+
+<!-- ``` -->
+<!-- ## Skewed distribution - when mean and median are different -->
+
+<!-- **The three numbers are often different for the same sample or population.** -->
+
+<!-- Example: -->
+
+<!-- ![Negatively skewed, Normal, and Positively Skewed distributions](skewed-curves.png) -->
+
+<!-- ## Scattered around the mean -->
+
+<!-- - Measures of dispersion typically look at how the data is scattered around the mean.  -->
+
+<!-- - Let's look at that visually.  -->
+
+<!-- - First the mean of *Assault* -->
+
+<!-- - Then the mean of *Urban Population* -->
+
+<!-- ## Scattered around the mean: Assault Arrests -->
+
+
+<!-- ```{r echo=TRUE} -->
+
+<!-- plot(arrests_data$UrbanPop,arrests_data$Assault) -->
+<!-- abline(h = mean_assault_arrests) -->
+
+<!-- ``` -->
+<!-- ## Scattered around the mean: Urban Population -->
+
+<!-- ```{r echo=TRUE} -->
+
+<!-- plot(arrests_data$UrbanPop,arrests_data$Assault, ylim = c(0,350)) -->
+<!-- abline(h = mean_assault_arrests) -->
+
+<!-- ``` -->
+
+## We start with the mean
+
+- Start with the mean
+- Our variable X: 1,7,21,13,19,5,9,17,11
+- Mean is 11.44
+
+## Visualizing distances from the mean
+
+- Plot the data points
+
+```{r eval=TRUE, echo=FALSE}
+X <- c(1,7,21,13,19,5,9,17,11) #create object X with data points
+
+mean_X <- mean(X) #create object mean_X with the mean of X
+plot(X, rep(1,length(X)), xlim=c(0,22), ylim=c(0,2), pch=19, xlab="X values", ylab="", main="Data Points and Mean") #plot the data points
+abline(v=mean_X, col="red", lwd=2) #add vertical
+# line for the mean
+
+
+
+```
+
+## Same Mean, Different Spread
+
+- Now, consider these two sets of data points with the same mean but different spreads:
+
+```{r eval=TRUE, echo=FALSE}
+Y <- c(2.1, 8.4, 12.7, 16.3, 20.0, 22.1, 25.9, 29.2, 30.5, 34.8) #create object Y with data points
+# second object Y2 with different spread but same mean
+mean_Y <- mean(Y) #create object mean_Y with the mean of Y
+
+Y2 <- c(18.2, 19.1, 19.5, 20.0, 20.3, 20.4, 20.5, 21.0, 21.2, 21.8) #create object Y2 with data points
+mean_Y2 <- mean(Y2) #create object mean_Y2 with the mean of Y
+
+
+plot(Y, rep(1,length(Y)), xlim=c(0,22), ylim=c
+     (0,2), pch=19, xlab="Y values", ylab="", main="Data Points and Mean") #plot the data points
+
+abline(v=mean_Y, col="blue", lwd=2) #add vertical line for the mean
+
+# Add Y2 to the first plot
+
+points(Y2, rep(1.5,length(Y2)), pch=19, col="green") #plot Y2 data points
+abline(v=mean_Y2, col="orange", lwd=2) #add
+# vertical line for the mean of Y2
+legend("topright", legend=c("Y Mean", "Y2 Mean"), col=c("blue", "orange"), lwd=2)
+
+
+
+
+```
+
+## Drawing on the board time!
+
+```{r}
+# Create a blank grid with both x and y axes numbered 0 to 20 and labeled
+plot(0, 0, xlim=c(0, 20), ylim=c(0, 15), xlab="Value", ylab="", main="Data Points and Mean", xaxt='n', yaxt='n') # Create blank plot
+axis(1, at=seq(0, 20, by=1)) # Add x-axis with ticks from 0 to 20
+# add ticks and labels for y axis
+axis(2, at=seq(0, 15, by=1), labels=rep("", 16)) # Add y-axis with ticks from 0 to 15 without labels
+# label the y axis ticks at 5, 10, and 15
+mtext(c("5", "10", "15"), side=2, at=c(5, 10, 15), line=0.5) # Label y-axis ticks at 5, 10, and 15
+
+
+
+```
+
+
+
+
+## Creating a measure of dispersion: distance to mean
+
+-  So, we could define a measure of dispersion or variation that is the total length of the colored lines. 
+- Our formula in English would be "the sum of the differences between each observation and the mean"
+
+
+
+## Drawing on the board time!
+
+```{r}
+# Create a blank grid with both x and y axes numbered 0 to 20 and labeled
+plot(0, 0, xlim=c(0, 20), ylim=c(0, 15), xlab="Value", ylab="", main="Data Points and Mean", xaxt='n', yaxt='n') # Create blank plot
+axis(1, at=seq(0, 20, by=1)) # Add x-axis with ticks from 0 to 20
+# add ticks and labels for y axis
+axis(2, at=seq(0, 15, by=1), labels=rep("", 16)) # Add y-axis with ticks from 0 to 15 without labels
+# label the y axis ticks at 5, 10, and 15
+mtext(c("5", "10", "15"), side=2, at=c(5, 10, 15), line=0.5) # Label y-axis ticks at 5, 10, and 15
+
+
+
+```
+
+
+
+
+
+
+## Problem with sum of distances
+
+The problem is that because of the definition of mean, the positive lines will cancel out the negative and the dispersion or variation would always be zero!
+
+
+
+## Simple Data Example
+
+Suppose we had a very simple data set with only two observations - 5 and 15. The mean is 10. One is 5 above the mean and one is 5 below the mean.
+
+
+
+
+
+## Distance from Mean Total 
+
+So, we want our new measure *total_variation* to equal the sum of the distances.
+
+
+
+## Math to the rescure!
+
+
+**Math comes to the rescue!**
+
+- What is something we can do that turns a negative number into a positive number every time and leaves a positive number as a positive? 
+- It's also important that any effect it has on the actual size of the numbers is consistent between positive and negative numbers. 
+
+
+
+## Math to the rescure! Code
+
+- We can square the distances
+
+
+
+## Results
+
+ - Squaring 5 turned it into 25 
+ - Squaring -5, which is the same size but negative, also turned it into 25. 
+ - So, now we can add them to get a measure of *total_squared_variation*.
+
+``
+
+
+## Are we done?
+
+- Suppose we had 1000 observations
+- Mean still 10
+- Each still 5 points away on average
+- What would our total variation be?
+
+Given that the actual average distances is exactly the same for both groups, does that make sense? Is it useful?
+
+
+
+## Solution: Average Squared Difference - Variance
+
+- We want the average of the distances or
+- Average of the squared differences. 
+
+- So our measure of *variance* is in the simplest form:
+
+$$
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+## Variance formula
+
+$$
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+s^2 = variance
+n = number of observations
+xi = each observation
+x̄ = mean of the observations
+
+
+
+## Problem: Squares inflate the results
+
+
+- Squares inflate the numbers relative to the size of the mean. 
+- 25 is 2.5 times the mean. 
+- But the distances aren't really that big
+- Average distance is still 5
+- We want to get back to the original unit of measure instead of the squared unit of measure...
+
+
+
+
+
+## Solution
+
+How can we solve this?
+
+- To partially account for this we can take the square root of the variance 
+- That gives us our next measure: *standard deviation*
+
+
+## Standard deviation
+
+- *standard deviation* is the square root of the variance
+
+$$
+s = \sqrt{s^2}
+$$
+
+
+
+
+## Standard deviation: full formula 
+
+
+$$
+s = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+
+
+
+
+## Sample vs Population
+
+- When we have data for the entire population, we can compute the true variance and standard deviation directly, so we divide by n
+- When we only have a sample, this is *systematically too small*, underestimating the population spread.
+- Dividing by *n−1* **(Bessel’s correction)** adjusts for this and makes the sample variance an unbiased estimator of the population variance
+
+
+
+## Population Variance 
+
+$$
+\sigma^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2
+$$
+
+## Population Standard Deviation
+
+$$
+\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^{
+n} (x_i - \mu)^2}
+$$
+
+or 
+
+$$
+\sigma = \sqrt{\sigma^2}
+$$
+
+
+## Quartiles
+
+- Quartiles divide the data into four equal parts
+- The first quartile (Q1) is the 25th percentile
+- The second quartile (Q2) is the 50th percentile (the median)
+- The third quartile (Q3) is the 75th percentile
+- The interquartile range (IQR) is the difference between Q3 and Q1 (IQR = Q3 - Q1)
+
+## Range
+
+- The range is the difference between the maximum and minimum values in the data set
+- Range = Max - Min
+
+
+
+
+## Authorship and License
+
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](../assets/creative_commons_license.png)</a>
+
+
+
+
