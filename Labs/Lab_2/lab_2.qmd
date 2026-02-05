@@ -1,0 +1,177 @@
+---
+title: "Lab 2 Document"
+format: docx
+---
+
+## Getting ready
+
+First, be sure you are in the project for the class github repository. You can check this by looking at the top of the RStudio window, it should show the name of the project as "pols3316_spring2026". If not, you can open the project by going to `File > Open Project` and selecting the `pols3316_spring2026.Rproj` file in the folder where you cloned the repository or by going to `File > Recent Projects` and selecting it from the list.
+
+Next, we are going to clear the console and remove all objects from the environment.
+
+To clear the console, you can use the shortcut `Ctrl + L` (Windows/Linux) or `Cmd + L` (Mac).
+
+To clear the environment, you can use the broom icon in the upper right or use following command in R by typing it in the console:
+
+rm(list = ls())
+
+Last, we are going to do a "Git Pull" to update the local repository with the latest material from the class github repository on GitHub.
+
+You can do this by going to the "Git" tab in the upper right pane of RStudio and clicking the "Pull" button or by using the following command in R by typing it in the console:
+
+system("git pull")
+
+Now, let's create a new R script file for this lab. You can do this by going to `File > New File > R Script`. Save the new file in your  `My_Labs` folder with the name `lab_2.R`. (If you named your folder something different, just save it there.)
+
+## Data Loading
+
+We are going to start by loading the data that we saved at the end of the last lab. The base R function to read a CSV file is *read.csv()*. 
+
+To do this, enter this in your script file:
+
+my_data_columns <- read.csv("data/my_data_columns.csv")
+
+Now, we want to view the data to make sure it is correct. This is done using the *View()* function. Enter this in your script file:
+
+View(my_data_columns) 
+
+Note that View() is one of the few functions in R that starts with a capital letter.
+
+
+## Using apply()
+
+Last time, we used the *apply()* function to find the means and medians of each column in our data frame and create a table. This time we are add to the table. We are going to add the measures of dispersion that we discussed in class: *variance* and *standard deviation*.
+
+First, we'll find the means and medians again using the *mean()* and *median()* functions. Enter this in your script file:
+
+column_means_columns <- apply(my_data_columns, 2, mean) 
+
+column_means_columns is the object name
+
+<- is the assignment operator
+
+apply() is the function
+
+The first *argument* - my_data_columns - is the data frame we are using.
+
+The second *argument* - 2 - is the margin which tells R to apply the function to columns. If we wanted rows, we would use 1 instead.
+
+The third *argument* - mean - is the function to apply, the *mean()* function.
+
+Then we repeat this, changing only the function to *median()*. Enter this in your script file:
+
+column_medians_columns <- apply(my_data_columns, 2, median)
+
+
+To find the variance of each column, we can use the *var()* function with apply(). Enter this in your script file:                
+
+column_variances <- apply(my_data_columns, 2, var)
+
+To find the standard deviation of each column, we can use the *sd()* function with apply(). Enter this in your script file:
+
+column_standard_deviations <- apply(my_data_columns, 2, sd)
+
+Now to create a table with all the statistics, we can use the *data.frame()* function to combine the results into a new data frame. Enter this in your script file:
+
+statistics_table <- data.frame(
+  Mean = column_means_columns,
+  Median = column_medians_columns,
+  Variance = column_variances,
+  Standard_Deviation = column_standard_deviations
+)
+
+This creates a new data frame called *statistics_table* with four columns: Mean, Median, Variance, and Standard_Deviation, each containing the respective statistics for the columns in our original data frame.
+
+To view the table, we type:
+
+statistics_table
+
+This will display the statistics table in the console.
+
+## Loading more data
+
+Now, let's try loading a different dataset.
+
+R has a lot of built-in datasets. One is called USArrests, which contains statistics about violent crimes in each of the 50 US states in 1973.
+
+To load this dataset in a new dataframe object called Arrests:
+
+Arrests <- USArrests
+
+To view this:
+
+View(Arrests)
+
+Let's display the column names so that we know what variables we are working with. We can use the *colnames()* function for this. Enter this in your script file:
+
+colnames(Arrests)
+
+
+## Find the descriptive stats for each variable name
+
+### find the mean for each name
+
+To simply display the result, we can just type the mean() function with the dataframe name and the *$ operator* to select the variable.
+
+mean(Arrests$Murder)
+mean(Arrests$Assault)
+mean(Arrests$UrbanPop)
+mean(Arrests$Rape)
+
+To display the median for each variable name, we do the same with the median() function.
+
+median(Arrests$Murder)
+
+To display the standard deviation, we use the sd() function
+
+sd(Arrests$Murder)
+
+To display the variance, we use the var() function
+
+var(Arrests$Murder)
+
+## Try on your own before next lab
+
+Try using the apply() function with the Arrests dataframe to create a table of means, medians, variances, and standard deviations for each variable in the Arrests dataframe.
+
+
+## Next we want to load a dataset from a web source
+
+The Source: We will use the Gapminder dataset (Life Expectancy & GDP by country). It is hosted on GitHub by its creator, Jenny Bryan. It is perfect for PolSci because it deals with countries, years, and development.
+
+The URL for the dataset is: https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv
+
+To load this, we can use the tidyverse package. Since you have probably not installed this, first, we have to install it. You only have to do this once:
+
+install.packages("tidyverse")
+
+Since you only need to do this once, you can run this line in the console (not in your script file).
+
+Now, we have to load the package each time we start R. We do this with the library() function which does need to be in your script file:
+
+library(tidyverse)
+
+Next, we are going to define the url to the dataset as an object
+
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+Now, we can use the read_tsv() function from the tidyverse package to read the data from the URL into a dataframe object called gapminder_data:
+
+gapminder_data <- read_tsv(url)
+
+Now, you can view the data to make sure it loaded correctly:
+
+View(gapminder_data)
+
+Now you have the data loaded, you can explore it.
+
+Use colnames() to see the variable names.
+
+Find the mean, median, variance, and standard deviation for at least one variable.
+
+
+
+
+
+
+
