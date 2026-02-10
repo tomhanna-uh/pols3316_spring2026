@@ -3,6 +3,12 @@ title: 'Lecture 3: Measures of Dispersion'
 date: today
 author: "POLS3316, Instructor: Tom Hanna, Spring 2025, University of Houston"
 format: 
+        pdf: 
+            toc: true
+            toc-depth: 2
+            toc-location: left
+            number-sections: true
+            fig_caption: true
         html:
                 theme: cosmo
                 style: custom.css
@@ -19,13 +25,7 @@ format:
                 slide-number: true
                 preview-links: true 
                 logo: ../assets/logo.png
-                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna" 
-        pdf: 
-            toc: true
-            toc-depth: 2
-            toc-location: left
-            number-sections: true
-            fig_caption: true
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
 ---
 
 ## Last class

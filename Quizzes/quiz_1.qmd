@@ -1,0 +1,75 @@
+---
+title: "Quiz February 10 and 11"
+format: pdf
+---
+
+## Instructions
+
+Write your name here: _____________________________
+
+1. Please read each question carefully and answer to the best of your ability.
+2. You may simplify to least common denominator and to the radical expression, $\sqrt{xxx}$, if necessary.
+
+
+## Question 1 - Mean
+
+Find the mean of the following numbers: 2, 4, 6, 8, 10.
+
+## Question 2 - Median
+
+Find the median of the following numbers: 3, 1, 4, 1, 5.
+
+## Question 3 - Mode
+
+Find the mode of the following numbers: 7, 8, 7, 9, 10. 
+
+## Question 4 - Range
+
+Find the range of the following numbers: 12, 15, 20, 10, 18.
+
+## Question 5 - Variance
+
+Find the variance of the following numbers: 5, 7, 9, 11, 13.
+
+## Question 6 - Standard Deviation
+
+Find the standard deviation of the following numbers: 4, 6, 8, 10, 12.
+
+## Question 7 - Mean 
+
+Find the mean of the following numbers: 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100.
+
+## Question 8 - Median
+
+Find the median of the following numbers: 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100.
+
+## Question 9 - Standard Deviation given variance
+
+Find the standard deviation of a variable, given that the variance is 100.
+
+## Question 10 - Variance given standard deviation
+
+Find the variance of a variable, given that the standard deviation is 15.
+
+## Question 11 - n-1
+
+When finding the sample variance, we divide by n-1 instead of n. What is this called?
+
+## Question 12 - Mode 
+
+What is the mode of the following numbers: 2, 4, 6, 8, 10, 2, 4, 6, 8, 10?
+
+## Question 13 - Mode 
+
+What is the mode of the following numbers: 1, 2, 3, 4, 5?
+
+
+
+
+
+
+
+
+
+
+

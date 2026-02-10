@@ -4,6 +4,12 @@ subtitle: "Lecture 2: Variables, Units of Observation, Variable Types, Measures 
 author: "Instructor: Tom Hanna, Fall 2025"
 date: January 27, 2026
 format: 
+        pdf: 
+            toc: true
+            toc-depth: 2
+            toc-location: left
+            number-sections: true
+            fig_caption: true
         revealjs:
                 self-contained: true
                 transition: convex
@@ -12,12 +18,6 @@ format:
                 preview-links: true 
                 logo: logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna <img src='logo.png' alt='UH Logo' style='height:30px;'>" 
-        pdf: 
-            toc: true
-            toc-depth: 2
-            toc-location: left
-            number-sections: true
-            fig_caption: true
 ---
 
 
