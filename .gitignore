@@ -34,3 +34,6 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 intro_to_r.html
+
+/.quarto/
+**/*.quarto_ipynb
