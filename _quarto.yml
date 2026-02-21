@@ -1,0 +1,24 @@
+# _quarto.yml
+project:
+  type: default
+  execute-dir: project
+
+format:
+  docx:
+    reference-doc: lab-template.docx
+    from: markdown-smart
+    toc: true
+    number-sections: true
+    highlight-style: github
+
+execute:
+  echo: true
+  eval: false
+  warning: false
+  message: false
+
+knitr:
+  opts_chunk:
+    tidy: true
+    tidy.opts:
+      width.cutoff: 70
