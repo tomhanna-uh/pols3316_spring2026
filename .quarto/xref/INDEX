@@ -1,5 +1,22 @@
 {
   "Labs/Lab_3/lab_3.qmd": {
     "lab_3.docx": "34706e0a"
+  },
+  "Lectures/Lecture_5_CLT_Correlation/lecture_5_CLT_Correlation.qmd": {
+    "lecture_5_CLT_Correlation.tex": "fb25a375"
+  },
+  "Lectures/Lecture_6_CLT_Correlation/lecture_6_CLT_Correlation.qmd": {
+    "lecture_6_CLT_Correlation.tex": "3e0e939d",
+    "lecture_6_CLT_Correlation.html": "a0cb353a"
+  },
+  "Lectures/Lecture_4 - Distributions/lecture_4.qmd": {
+    "lecture_4.html": "ebc2afd1"
+  },
+  "Lectures/Lecture_6_CLT_Correlation/lect6.qmd": {
+    "lect6.html": "4d7bb664",
+    "lect6.docx": "bec4f75f"
+  },
+  "Lectures/Lecture_6_CLT_Correlation/lect6_js.qmd": {
+    "lect6_js.html": "30069a93"
   }
 }
