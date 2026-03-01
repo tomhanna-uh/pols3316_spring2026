@@ -18,5 +18,12 @@
   },
   "Lectures/Lecture_6_CLT_Correlation/lect6_js.qmd": {
     "lect6_js.html": "30069a93"
+  },
+  "Lectures/Lecture_7_CI_Hypothesis_Testing/lecture_7_CI_hypothesis_testing.qmd": {
+    "lecture_7_CI_hypothesis_testing.html": "4c1328b4",
+    "lecture_7_CI_hypothesis_testing.tex": "7d6cc1ed"
+  },
+  "Lectures/saved stuff.qmd": {
+    "saved stuff.html": "7cf72208"
   }
 }
