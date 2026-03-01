@@ -17,6 +17,10 @@ copyright:
   year: 2026
 date: today
 format: 
+        docx:
+                toc: true
+                number-sections: true
+                reference-doc: ../../lab-template.docx
         revealjs:
                 self-contained: true
                 transition: convex
@@ -35,11 +39,11 @@ format:
                 logo: ../logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
-            toc: true
-            toc-depth: 2
-            toc-location: left
-            number-sections: true
-            fig_caption: true
+                toc: true
+                toc-depth: 2
+                toc-location: left
+                number-sections: true
+                fig_caption: true
 ---
 
 # Agenda and Announcements
