@@ -1,5 +1,5 @@
 ---
-title: "Lecture 6: Law of Large Numbers, Central Limit Theorem, & Correlation"
+title: "Lecture 7: Hypothesis Testing and Confidence Intervals"
 author: 
   - name: Tom Hanna
     id: th
@@ -21,6 +21,12 @@ format:
                 toc: true
                 number-sections: true
                 reference-doc: ../../lab-template.docx
+        pdf: 
+                toc: true
+                toc-depth: 2
+                toc-location: left
+                number-sections: true
+                fig_caption: true
         revealjs:
                 self-contained: true
                 transition: convex
@@ -38,12 +44,6 @@ format:
                 code-fold: false
                 logo: ../logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
-        pdf: 
-                toc: true
-                toc-depth: 2
-                toc-location: left
-                number-sections: true
-                fig_caption: true
 ---
 
 # Agenda and Announcements
