@@ -3,12 +3,6 @@ title: "Lecture 4: Distributions"
 date: today
 author: "POLS3316, Instructor: Tom Hanna, Spring 2025, University of Houston"
 format: 
-        pdf: 
-            toc: true
-            toc-depth: 2
-            toc-location: left
-            number-sections: true
-            fig_caption: true
         html:
                 theme: cosmo
                 style: custom.css
@@ -17,6 +11,12 @@ format:
                 code-fold: false
                 logo: ../logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        pdf: 
+            toc: true
+            toc-depth: 2
+            toc-location: left
+            number-sections: true
+            fig_caption: true
         revealjs:
                 self-contained: true
                 transition: convex

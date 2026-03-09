@@ -126,3 +126,46 @@ ggplot(gapminder_data, aes(x = lifeExp)) +
         stat_function(fun = dnorm, args = list(mean = mean(gapminder_data$lifeExp), sd = sd(gapminder_data$lifeExp)), color = "red", size = 1) +
         labs(title = "Histogram of Life Expectancy with Normal Curve", x = "Life Expectancy", y = "Density")
 
+
+
+# use stargazer to plot the mean, median, and standard deviation 
+# of the pop and year for the gapminder_data
+
+library(stargazer)
+
+
+# to do that, I first define the variables to be included
+# You will need to change this to the variables you want to show
+
+vars <- c("year","pop")
+
+# Then create a data frame with those variables
+# You will need to change the name of the data to match the 
+# data you want to use
+
+df   <- as.data.frame(gapminder_data[, vars])
+
+
+# Since the variables and new data frame are defined above
+# You can copy the next part exactly for most purposes
+# Because this is a dataframe, we use sapply() instead of apply()
+
+
+stats_table <- data.frame(
+        Variable = vars,
+        Mean     = round(sapply(df, mean),   3),
+        Median   = round(sapply(df, median), 3),
+        Variance = round(sapply(df, var),    3),
+        SD       = round(sapply(df, sd),     3)
+)
+
+stargazer(
+        stats_table,
+        type     = "text",
+        title    = "Descriptive Statistics",
+        summary  = FALSE,
+        rownames = FALSE,
+        digits   = 3
+)
+
+

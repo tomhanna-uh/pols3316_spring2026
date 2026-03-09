@@ -1,0 +1,208 @@
+---
+title: "Lecture 6: Law of Large Numbers, Central Limit Theorem, & Correlation"
+author: 
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation: 
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright: 
+  holder: Tom Hanna
+  year: 2026
+date: today
+format: 
+        html:
+                theme: cosmo
+                style: custom.css
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                theme: ../assets/custom.scss
+                slide-number: true
+                preview-links: true 
+                logo: ../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+        pdf: 
+            toc: true
+            toc-depth: 2
+            toc-location: left
+            number-sections: true
+            fig_caption: true
+---
+
+## Agenda for Today
+
+- The Law of Large Numbers (LLN)
+- The Central Limit Theorem (CLT)
+- Visualizing Distributions
+- Understanding Covariance
+- Pearson's Correlation Coefficient (r)
+
+## The Law of Large Numbers (LLN)
+
+- The Law of Large Numbers states that as the number of trials increases, the sample mean will converge on the true population mean.
+- Consider a fair coin flip: getting 70% heads is common in 10 flips.
+- Getting 70% heads is statistically impossible if we flip it 10,000 times.
+- The results will always settle near the true probability of 50%.
+
+## Class Question: The Gambler's Fallacy
+
+- If a gambler loses 5 hands of blackjack in a row, are they "due" for a win?
+- How does the Law of Large Numbers explain why the "Gambler's Fallacy" is incorrect?
+
+## Law of Large Numbers and Central Limit Theorem
+
+[LLN and CLT](https://tom-hanna.org/teaching/teaching/stats-and-research-design/pols-3316-statistics-for-political-scientists-interactive-lecture-module/)
+
+## Bridging to the Central Limit Theorem
+
+- The LLN deals with the stability of a single long-run average.
+- The Central Limit Theorem (CLT) explains the shape of the distribution of many sample averages.
+- Recall our previous visual preview: multiple trials of a binomial distribution eventually form a predictable curve.
+
+## The Central Limit Theorem (CLT)
+
+- Core Concept: The sampling distribution of the sample mean will approach a normal distribution as the sample size (n) increases.
+- This happens regardless of the shape of the underlying population distribution.
+- Even if our population data looks like a flat line (uniform) or is heavily skewed (like income data), the averages will form a Bell Curve.
+
+## The "Magic" Number 30
+
+- In statistics, we often cite n >= 30 as the threshold.
+- At n >= 30, the sampling distribution creates a sufficiently normal shape to perform hypothesis tests.
+- This allows us to use Z-scores and T-tests on messy real-world political data because we are testing the means, not the raw individuals.
+
+## Visualizing the CLT
+
+- Imagine the distribution of rolling 1 die: it is flat and uniform.
+- Imagine the distribution of the average of 5 dice: it becomes mound-shaped.
+- Imagine the distribution of the average of 30 dice: it becomes a perfect normal bell curve.
+
+## Class Question: Political Polling
+
+- Why is the Central Limit Theorem vital for political polling?
+- If we only survey 10 people for a presidential poll, can we confidently assume the error is normally distributed?
+
+## Moving to Relationships: Covariance
+
+- Covariance is a measure of the joint variability of two random variables.
+- It indicates the direction of the linear relationship.
+- Positive: X and Y move together.
+- Negative: X and Y move in opposite directions.
+- Near Zero: X and Y are completely unrelated.
+
+## The Limitation of Covariance
+
+- Covariance is unstandardized.
+- The resulting number depends entirely on the units of measurement.
+- "Dollars" versus "Millions of Dollars" yields completely different numbers for the exact same relationship.
+- A covariance of 500 might be weak in one context and strong in another.
+- Only applies to linear relationships!
+
+
+## The Sample Covariance Formula
+
+$$Cov(X, Y) = \frac{\sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})}{n - 1}$$
+
+        1. This is the same notation we used for mean and variance, we just have an extra variable.
+        2. The Numerator: This part of the equation calculates the cross products. It finds the difference between each observation and its respective mean for both variables.
+        3. The Denominator: We divide by $n - 1$ to account for degrees of freedom. This adjustment ensures the sample covariance is an unbiased estimate of the population covariance.
+        4. Interpretation: The sign of the result indicates the direction of the relationship. A positive value means variables move together. A negative value means they move in opposite directions.
+
+
+## Why Cross-Products?
+
+- In Variance, we square deviations $(x_i - \bar{x})^2$ so they do not sum to zero.
+
+        - Squaring makes everything positive, which hides the direction of the relationship.
+        
+- In Covariance, we multiply $(x_i - \bar{x})$ by $(y_i - \bar{y})$ instead of squaring which also prevents summing to zero but allows us to see direction.
+
+        - If both variables are above their means, the product is positive $(+ \times +)$.
+        - If both are below their means, the product is also positive $(- \times -)$.
+        - If they move in opposite directions, the product is negative $(+ \times -)$.
+
+
+## Pearson’s Correlation Coefficient (r)
+
+- Correlation standardizes the relationship so we can interpret it easily.
+- It is essentially Covariance divided by the product of the standard deviations of the variables.
+- This mathematical step squashes the value into a specific, universal range.
+- Still only applies to linear relationships!
+
+## Pearson's Correlation Coefficient ($r$)
+
+$$r = \frac{Cov(x, y)}{s_x s_y}$$
+
+        - The product of the standard deviations creates a standardized scale
+
+## Pearson's Correlation Coefficient (cont)
+
+The expanded version of the formula demonstrates how we are comparing shared variance to total variance:
+
+$$r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2 \sum_{i=1}^{n} (y_i - \bar{y})^2}}$$
+
+        - Because we are dividing by the product of the standard deviations, the resulting coefficient is unitless and bounded. The value of $r$ will always fall within the range of -1.0 to +1.0. A result of +1.0 indicates a perfect positive linear relationship, while -1.0 represents a perfect negative linear relationship. A result near zero suggests that no linear relationship exists between the variables.
+
+## Interpreting r
+
+- The value of r will always fall between -1.0 and +1.0.
+- 1.0: Perfect positive relationship.
+- -1.0: Perfect negative relationship.
+- 0: No linear relationship.
+- This makes relationships comparable regardless of their original units.
+
+
+## Why is Correlation Bounded?
+
+The correlation coefficient ($r$) is a standardized measure that always falls between -1.0 and +1.0. This mathematical property ensures that we can compare the strength of relationships across different datasets regardless of their original units of measurement. This boundary is not arbitrary; it is a direct result of the geometric and algebraic relationship between the two variables.
+
+## The Geometric Intuition
+
+One way to understand this boundary is to treat our data as vectors. If we center our variables by subtracting their means, we can represent $X$ and $Y$ as two vectors in high-dimensional space. In this context, the correlation coefficient is identical to the cosine of the angle ($\theta$) between these two vectors. 
+
+$$r = \cos(\theta)$$
+
+Because the cosine of any angle must fall between -1.0 and +1.0, the correlation coefficient is restricted to that same range. 
+
+## Interpreting the Angle
+
+When the two vectors point in exactly the same direction, the angle is 0 degrees and the cosine is 1. This represents a perfect positive correlation. When the vectors point in exactly opposite directions, the angle is 180 degrees and the cosine is -1, representing a perfect negative correlation. If the vectors are perpendicular, the angle is 90 degrees and the cosine is 0, indicating the variables are linearly unrelated.
+
+## Geometric Demonstration
+
+[Geometric Demonstration of Correlation Bounds](https://tom-hanna.org/teaching/teaching/stats-and-research-design/geometric-demo-of-correlation-bounds/)
+
+
+## Class Question: Covariance vs. Correlation
+
+- If I tell you the covariance between GDP and Democracy Scores is 452, do you know if that is a strong relationship?
+- What if I tell you the Correlation (r) is 0.85?
+
+
+## Demonstration of Covariance vs Correlation
+
+[Demonstration of Correlation vs. Covariance](https://tom-hanna.org/teaching/teaching/stats-and-research-design/pols-3316-statistics-for-political-scientists-interactive-lecture-module/)
+
+
+
+
+## Authorship and License
+
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](../assets/creative_commons_license.png)</a>
+
