@@ -1,0 +1,266 @@
+---
+title: "Lab 3: More Data Loading and Data Visualization"
+author: 
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation: 
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright: 
+  holder: Tom Hanna
+  year: 2026
+date: today
+format:
+  docx:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    highlight-style: github
+    page-width: 6.5
+from: markdown-smart
+execute:
+  echo: true
+  eval: false
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    tidy: true
+    tidy.opts:
+      width.cutoff: 70
+---
+
+## Getting ready
+
+### Proper project
+
+Be sure you are in the project for the class github repository. You can check this by looking at the top of the RStudio window, it should show the name of the project as "pols3316_spring2026". If not, you can open the project by going to `File > Open Project` and selecting the `pols3316_spring2026.Rproj` file in the folder where you cloned the repository or by going to `File > Recent Projects` and selecting it from the list.
+
+### Clear the console and environment
+
+Next, we are going to clear the console and remove all objects from the environment.
+
+To clear the console, you can use the shortcut `Ctrl + L` (Windows/Linux) or `Cmd + L` (Mac).
+
+To clear the environment, you can use the broom icon in the upper right or use following command in R by typing it in the console:
+
+```r
+# this command erases all objects from the environment
+
+rm(list = ls())
+```
+
+### Git Pull
+
+Last, we are going to do a *"Git Pull"* to update the local repository with the latest material from the class github repository on GitHub.
+
+You can do this by going to the "Git" tab in the upper right pane of RStudio and clicking the "Pull" button or by using the following command in R by typing it in the console:
+
+```r
+# this executes a git pull
+
+system("git pull")
+```
+
+If you get errors refer to the instructions for handling errors in Lab 3. (I will not repeat them here as some people were running them when they had no errors.) 
+
+###
+
+Now, let's create a new R script file for this lab. You can do this by going to `File > New File > R Script`. Save the new file in your  `My_Labs` folder with the name `lab_4.R`. (If you named your folder something different, just save it there.)
+
+
+## Data Loading
+
+Now, load the gapminder data and the V-Dem 2014 data from Labs 2 and 3 using whichever method worked for you. You do not need to reinstall the V-Dem library if it worked, but you do need to use the `library(vdemdata)` function. If you were not able to load either of those and had to use the workaround posted in https://canvas.uh.edu/courses/27445/pages/lab-3-error-fixes for Lab 3, you will need to use it here. 
+
+Be sure to include the renaming step for the vdem_indices_2014 dataframe.
+
+## Computing Correlations and Covariances
+
+First, get the the colnames() for the data we are going to work with, so you have correct spellings and names.
+
+```
+# find the correlation and covariance for exports and polyarchy from v-dem
+# find the correlation and covariance for lifeExp and pop from gapminder_data
+
+# get variable names for the three files
+
+colnames(gapminder_data)
+
+colnames(vdem_indices_2014)
+```
+
+Next, look at the help for the two functions we will be using. We're going to build the functions step-by-step using the help file to guide us (in video I explain this!).
+
+```
+# look at the help for the cov() function
+
+?cov
+
+?cor
+```
+
+Now that we are ready to build the functions, we are going assign them to object names so that we can use them later to produce tables of the values.
+
+```
+# get the covariances and correlations and store them as 1 for the vdem
+# and 2 for the gapminder
+
+cov1 <- cov(vdem_indices_2014$exports, vdem_indices_2014$polyarchy,
+            use = "pairwise.complete.obs")
+            
+cor1 <- cor(vdem_indices_2014$exports, vdem_indices_2014$polyarchy,
+           use = "pairwise.complete.obs")
+
+cov2 <- cov(gapminder_data$lifeExp, gapminder_data$pop,
+            use = "pairwise.complete.obs")
+            
+cor2 <- cor(gapminder_data$lifeExp, gapminder_data$pop,
+            use = "pairwise.complete.obs")
+```
+
+
+To build the table, we will start by creating a dataframe with the results named `stats_df`.
+
+```
+# create a data frame with the results
+
+stats_df <- data.frame(
+        Dataset = c("V-Dem 2014", "Gapminder"),
+        Covariance = c(cov1, cov2),
+        Correlation = c(cor1, cor2)
+        )
+        
+```
+
+For those who did not install stargazer, you can create a simple table with
+
+```
+stats_df
+```
+
+If you installed stargazer, use:
+
+```
+# produce a table from the dataframe using stargazer
+
+library(stargazer)
+
+stargazer(stats_df,
+          summary = FALSE,
+          rownames = FALSE,
+          type = "text")  # or "text"/"html"
+```
+
+Next, we are going to create a correlation matrix as a table, a simple graphic correlation matrix, and a little nicer correlation matrix. This will show how all the numeric variables in vdem_indices_2014 correlate to each other. 
+
+You will need two packages for this. `dplyr()` is included in the `tidyverse` and we have used it before, so you will need to load it with the `library()` function. 
+
+`corrplot()` is new, so you will need to install it with the `install.packages("corrplot")` function in the console, then load it in the script with `library("corrplot")`.
+
+```
+# if needed - remove the comment from the install.packages, run it, and either 
+# delete or recomment it. You can also just copy it to the console without the 
+# comment (#) and hit enter
+# install.packages("corrplot")
+
+library(dplyr)
+library(corrplot)
+
+```
+
+Next, we have to remove the non-numeric variables from the data_set or we will get errors. The easiest way to do this is to create a new data frame by selecting only the numeric variables with `select(where(is.numeric))` . 
+
+```
+# we have to remove the non-numeric variables to avoid errors
+
+# keep only numeric variables
+vdem_num <- vdem_indices_2014 %>% 
+        select(where(is.numeric))
+        
+```
+
+Next, we will create the correlation matrix and assign it to an object named cor_mat.
+
+```
+# correlation matrix (Pearson, pairwise complete obs)
+cor_mat <- cor(vdem_num, use = "pairwise.complete.obs", method = "pearson")
+
+```
+
+We can view cor_mat in the console...
+
+```
+# view as a table in console
+round(cor_mat, 2)
+```
+
+Or, we can produce a table with a little more control using stargazer()
+
+```
+stargazer(cor_mat, type = "text", title = "Correlation Matrix of V-Dem 2014 Variables", align = TRUE)
+
+```
+
+Now, we are going to produce this graphically. There is a very basic R function `pairs()` which will give us a set of pair-by-pair (pairwise) scatterplots.
+
+```
+# produce a simple correlogram with pairs()
+
+pairs(vdem_num)
+```
+
+For something a little nicer, we can use the `corrplot()` function from the `corrplot` package we just loaded.
+
+```
+# basic correlogram with corrplot
+
+corrplot(cor_mat)
+```
+
+To get something with a bit more control that is a bit easier to read and interpret, at least when zoomed out, `corrplot()` offers us a lot of control. Check out ?corrplot for more specifics.
+
+```
+# slightly nicer: only upper triangle, clustered
+corrplot(
+        cor_mat,
+        method = "color",
+        type   = "upper",
+        order  = "hclust",
+        addCoef.col = "black",   # add correlation coefficients
+        tl.col = "black",        # text label color
+        tl.srt = 45              # text rotation
+)
+```
+
+
+## Assignment for Lab 4
+
+1. Find the correlation and covariance for your two variables of interest for the dataset you will use for the semester project.
+2. Put these in the best table you can produce and copy to a Word or other document.
+3. If your dataset has more than two numeric variables, produce a correlation matrix in table and graphic format and place it in the Word or other document.
+
+        - Remember, you have to remove the non-numeric variables first, probably by creating a new data frame or you will get errors.
+        - select(where(is.numeric)) will not include categorical variables unless they are stored as numbers, but you can not run correlations or covariance on them anyway
+        - Save graphics or export them - no screenshots or cell phone pictures.
+        
+4. If your dataset does not have more than two numeric variables you can either:
+
+        - Subset the cdem_indices_2014 data and produce a different plot than the example 
+        - If you successfully installed the V-Dem package, select entirely different variables from V-Dem (see notes about the Codebook in Lab 3)
+        - Use the gapminder_data 
+
+
+
+
+
+
+
+
+

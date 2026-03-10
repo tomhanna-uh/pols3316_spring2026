@@ -18,8 +18,6 @@ colnames(gapminder_data)
 
 colnames(vdem_indices_2014)
 
-colnames(my_data_loaded)
-
 
 
 # look at the help for the cov() function
@@ -64,9 +62,10 @@ stargazer(stats_df,
 
 ## correlation matrix of V-dem data (vdem_indices_2014) in table
 
-# if needed - remove the comment from the install.packages, run it, and either delete
-# or recomment it
-install.packages("corrplot")
+# if needed - remove the comment from the install.packages, run it, and either 
+# delete or recomment it. You can also just copy it to the console without the 
+# comment (#) and hit enter
+# install.packages("corrplot")
 
 library(dplyr)
 library(corrplot)
@@ -83,12 +82,16 @@ cor_mat <- cor(vdem_num, use = "pairwise.complete.obs", method = "pearson")
 # view as a table in console
 round(cor_mat, 2)
 
-stargazer(cor_mat, type = "text")
+stargazer(cor_mat, type = "text", title = "Correlation Matrix of V-Dem 2014 Variables", align = TRUE)
 
+# produce a simple correlogram with pairs()
 
 pairs(vdem_num)
 
-# basic correlogram
+
+
+# basic correlogram with corrplot
+
 corrplot(cor_mat)
 
 # slightly nicer: only upper triangle, clustered
@@ -102,3 +105,7 @@ corrplot(
         tl.srt = 45              # text rotation
 )
 
+
+
+
+vdem_indices_2014 <- read_csv("data/vdemdata.csv")
