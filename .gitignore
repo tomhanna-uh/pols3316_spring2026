@@ -37,6 +37,6 @@ intro_to_r.html
 Toms_Labs
 Toms_Data
 My_Labs2
-
 /.quarto/
 **/*.quarto_ipynb
+push_to_rpubs.R
