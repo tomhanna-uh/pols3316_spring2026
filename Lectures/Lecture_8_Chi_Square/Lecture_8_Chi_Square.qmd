@@ -1,0 +1,529 @@
+---
+title: "Lecture 8: Hypothesis Testing: Z-score and Chi-Square"
+author: 
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation: 
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright: 
+  holder: Tom Hanna
+  year: 2026
+date: today
+format: 
+        docx:
+                toc: true
+                number-sections: true
+                reference-doc: ../../lab-template.docx
+        html:
+                theme: cosmo
+                style: custom.css
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                theme: ../assets/custom.scss
+                slide-number: true
+                preview-links: true 
+                logo: ../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+        pdf: 
+                toc: true
+                toc-depth: 2
+                toc-location: left
+                number-sections: true
+                fig_caption: true
+---
+
+# Agenda and Announcements
+
+- Today
+
+        - Hypothesis Testing: Z-Score and Chi-Square
+        - Top Hat Quiz
+        
+- Next class
+
+        - Lab 4 completion
+        - Lab 5
+
+
+
+
+
+
+# Hypothesis testing Z-Scores
+
+## What is a Z-Score?
+
+- A z-score tells us how many standard deviations a value is from the mean.
+- Positive z-scores are above the mean
+- Negative z-scores are below the mean
+- A z-score is the **precise** representation of the 68-95-99 Rule
+
+## The 68-95-99.7 Rule
+
+![68-95-99.7 rule](68-95-997.png)
+
+
+## What is a Z-Score? (cont)
+
+- The actual 95% area under the normal curve is between -1.96 and +1.96 standard deviations from the mean 
+- The actual 95% area is from z = -1.96 to z = 1.956
+- If the area under the curve is 95%, then 5% is outside it in the **two tails**
+
+## The tails
+
+```{r tails}
+#| echo: false
+#| eval: true
+#| fig-width: 7
+#| fig-height: 4
+
+library(ggplot2)
+
+lower <- -1.96
+upper <-  1.96
+
+z_vals <- seq(-3.5, 3.5, length.out = 1000)
+
+df <- data.frame(
+  z  = z_vals,
+  dz = dnorm(z_vals)
+)
+
+# left tail polygon
+left_tail <- rbind(
+  c(z = min(z_vals), dz = 0),
+  subset(df, z <= lower),
+  c(z = lower, dz = 0)
+)
+
+# right tail polygon
+right_tail <- rbind(
+  c(z = upper, dz = 0),
+  subset(df, z >= upper),
+  c(z = max(z_vals), dz = 0)
+)
+
+ggplot() +
+  # shade left tail
+  geom_polygon(
+    data = left_tail,
+    aes(x = z, y = dz),
+    fill = "tomato",
+    alpha = 0.7
+  ) +
+  # shade right tail
+  geom_polygon(
+    data = right_tail,
+    aes(x = z, y = dz),
+    fill = "tomato",
+    alpha = 0.7
+  ) +
+  # full normal curve
+  geom_line(
+    data = df,
+    aes(x = z, y = dz),
+    linewidth = 0.6
+  ) +
+  geom_vline(xintercept = c(lower, upper), linetype = "dashed") +
+  labs(
+    x = "z", y = "",
+    title = "Standard Normal Curve with 5% in the Two Tails"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y  = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+
+
+## Two-tail test
+
+- In a hypothesis test, we are testing the probability that the event is not due to random chance
+- We set a threshold (usually α = 0.05) for how unlikely a result must be before we reject the null hypothesis
+- In a two-tail test, we split α into both tails: α/2 = 0.025 in each tail
+- If our test statistic falls in either tail (beyond ±1.96), we reject the null hypothesis
+- This corresponds to a probability less than 5% or p < .05
+
+
+## Z-Test: Formula
+
+**Formula:**
+
+$$z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$
+
+**Where:**
+
+- $\bar{x}$ = sample mean
+- $\mu_0$ = hypothesized population mean (from null hypothesis)
+- $\sigma$ = population standard deviation
+- $n$ = sample size
+
+## Z-Test: Steps
+
+**Steps:**
+
+1. State your null hypothesis ($H_0: \mu = \mu_0$) and alternative hypothesis ($H_a$)
+2. Calculate the test statistic using the formula above
+3. For a two-tail test at $\alpha = 0.05$, the critical values are $z = \pm 1.96$
+
+## Z-test: Decision rule
+
+Two tail:
+
+   - **Reject** $H_0$ if $z > 1.96$ or $z < -1.96$
+   - **Fail to reject** $H_0$ if $-1.96 \le z \le 1.96$
+   - Shorthand: reject if $|z| > 1.96$
+   
+## Z-tail: Right tail decision rule
+
+**Right-tail test** ($H_a: \mu > \mu_0$)
+
+- Critical value: $z_{critical} = 1.645$
+- Decision rule:
+  - **Reject** $H_0$ if $z > 1.645$
+  - **Fail to reject** $H_0$ if $z \le 1.645$
+  - Shorthand: reject if $z$ is in the **right tail** beyond 1.645
+  
+  
+## Z-tail: Left-tail decision rule
+
+**Left-tail test** ($H_a: \mu < \mu_0$)
+
+- Critical value: $z_{critical} = -1.645$
+- Decision rule:
+  - **Reject** $H_0$ if $z < -1.645$
+  - **Fail to reject** $H_0$ if $z \ge -1.645$
+  - Shorthand: reject if $z$ is in the **left tail** beyond -1.645
+  
+  
+## What is a Crosstab?
+
+- A **crosstab** (contingency table) shows counts for two categorical variables in rows and columns
+- Each cell contains the **frequency** of cases with that combination of categories
+
+## Example Crosstab
+
+**Example structure (2×3 table):**
+
+|            | Category 1 | Category 2 | Category 3 |
+|------------|------------|------------|------------|
+| Group A    |      ?     |      ?     |      ?     |
+| Group B    |      ?     |      ?     |      ?     |
+
+## Example: Observed Counts Only
+
+**Research Question:** Is there an association between gender and support for a new campus policy?
+
+**Observed data from 200 students:**
+
+|            | Support | Oppose |
+|------------|---------|--------|
+| **Female** |   60    |   40   |
+| **Male**   |   45    |   55   |
+
+## Example: Add Row and Column Totals
+
+**Fill in the marginals (row totals, column totals, and grand total):**
+
+|            | Support | Oppose | Row Total |
+|------------|---------|--------|-----------|
+| **Female** |   60    |   40   |    ___    |
+| **Male**   |   45    |   55   |    ___    |
+| **Column Total** | ___ | ___ | **___**   |
+
+## Example: Completed Observed Table
+
+|            | Support | Oppose | Row Total |
+|------------|---------|--------|-----------|
+| **Female** |   60    |   40   |    100    |
+| **Male**   |   45    |   55   |    100    |
+| **Column Total** | 105 |   95   | **200**   |
+
+## Example: Calculate Expected Counts
+
+**Formula:** $E_{ij} = \frac{(\text{row total}) \times (\text{column total})}{\text{grand total}}$
+
+**Calculate expected count for each cell:**
+
+- Female & Support: $E_{11} = \frac{100 \times 105}{200} = \_\_\_$
+- Female & Oppose: $E_{12} = \frac{100 \times 95}{200} = \_\_\_$
+- Male & Support: $E_{21} = \frac{100 \times 105}{200} = \_\_\_$
+- Male & Oppose: $E_{22} = \frac{100 \times 95}{200} = \_\_\_$
+
+## Example: Expected Counts Table
+
+|            | Support | Oppose | Row Total |
+|------------|---------|--------|-----------|
+| **Female** |  52.5   |  47.5  |    100    |
+| **Male**   |  52.5   |  47.5  |    100    |
+| **Column Total** | 105 |   95   |   **200** |
+
+**These are the counts we would expect if there were NO association**
+
+## Example: Calculate (O - E) for Each Cell
+
+**For each cell, compute:** Observed - Expected
+
+|            | Support | Oppose |
+|------------|---------|--------|
+| **Female** | 60 - 52.5 = ___ | 40 - 47.5 = ___ |
+| **Male**   | 45 - 52.5 = ___ | 55 - 47.5 = ___ |
+
+## Example: Differences (O - E)
+
+|            | Support | Oppose |
+|------------|---------|--------|
+| **Female** |  +7.5   |  -7.5  |
+| **Male**   |  -7.5   |  +7.5  |
+
+**Note the symmetry:** Differences sum to zero in each row and column
+
+## Where did we run into this before?
+
+- Variance
+- When we talked about computing confidence intervals, squaring deviations meant we couldn't use the normal distribution
+- That meant we couldn't use a z-score there
+- What distribution did we have to use?
+
+
+
+## Distribution Comparison
+
+```{r}
+#| label: chi-squ
+#| eval: true
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-align: "center"
+
+library(ggplot2)
+
+ggplot(data.frame(x = c(-4, 15)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 1), aes(color = "Standard Normal"), linewidth = 1) +
+  stat_function(fun = dchisq, args = list(df = 3), aes(color = "Chi-Square (df=3)"), linewidth = 1) +
+  stat_function(fun = dchisq, args = list(df = 5), aes(color = "Chi-Square (df=5)"), linewidth = 1) +
+  scale_color_manual(name = "Distributions", 
+                     values = c("Standard Normal" = "black", 
+                                "Chi-Square (df=3)" = "blue", 
+                                "Chi-Square (df=5)" = "red")) +
+  labs(title = "Normal vs Chi-Square",
+       x = "Value", 
+       y = "Density") +
+  theme_minimal()
+```
+
+
+## χ² instead of z-score
+
+- Here we will use the **χ²** statistic instead of the z-score
+- The z-score is always based on the **same** normal distribution
+- The chi-square is not just one curve: we pick a specific **χ² distribution** based on the degrees of freedom
+
+
+## What is degrees of freedom?
+
+- Chi-square shows up whenever we add up **squared differences between what we observe and what we expect**
+- These are also called **squared residuals**
+- The **degrees of freedom** tell us how many **independent pieces** of information went into that total
+- In a crosstab, fixing the row and column totals means not every cell can vary freely, so the df is $(r - 1)(c - 1)$
+- So instead of one universal z table, we have a family of χ² tables—one curve for each degrees-of-freedom value.
+
+## χ² Critical Values (α = 0.05)
+
+| df | χ² critical (α = 0.05) |
+|----|------------------------|
+|  1 | 3.84                   |
+|  2 | 5.99                   |
+|  3 | 7.82                   |
+|  4 | 9.49                   |
+|  5 | 11.07                  |
+|  6 | 12.59                  |
+
+
+
+## Example: next step
+
+**Calculate $\frac{(O - E)^2}{E}$ for Each Cell**
+
+$$\chi^2 = \sum \frac{(O - E)^2}{E}$$
+
+**Female & Support:** $\frac{(7.5)^2}{52.5} = \frac{56.25}{52.5} = \_\_\_$
+
+**Female & Oppose:** $\frac{(-7.5)^2}{47.5} = \frac{56.25}{47.5} = \_\_\_$
+
+**Male & Support:** $\frac{(-7.5)^2}{52.5} = \frac{56.25}{52.5} = \_\_\_$
+
+**Male & Oppose:** $\frac{(7.5)^2}{47.5} = \frac{56.25}{47.5} = \_\_\_$
+
+## Example: Chi-Square Components
+
+**Female & Support:** $\frac{56.25}{52.5} = 1.071$
+
+**Female & Oppose:** $\frac{56.25}{47.5} = 1.184$
+
+**Male & Support:** $\frac{56.25}{52.5} = 1.071$
+
+**Male & Oppose:** $\frac{56.25}{47.5} = 1.184$
+
+**Sum all four:** $\chi^2 = 1.071 + 1.184 + 1.071 + 1.184 = \_\_\_$
+
+## Example: Chi-Square Test Statistic
+
+$$\chi^2_{calc} = 4.51$$
+
+**Now we need to compare this to the critical value**
+
+## Example: Find Degrees of Freedom
+
+$$df = (r - 1)(c - 1)$$
+
+- Number of rows: $r = \_\_\_$
+- Number of columns: $c = \_\_\_$
+
+$$df = (\_\_\_ - 1)(\_\_\_ - 1) = \_\_\_$$
+
+## Example: Degrees of Freedom
+
+$$df = (r - 1)(c - 1)$$
+
+- Number of rows: $r = 2$
+- Number of columns: $c = 2$
+
+$$df = (2 - 1)(2 - 1) = 1$$
+
+## Example: Critical Value
+
+**From chi-square distribution table:**
+
+- $df = 1$
+- $\alpha = 0.05$
+- $\chi^2_{critical} = 3.841$
+
+## Example: Make Decision
+
+**Decision rule:** Reject $H_0$ if $\chi^2_{calc} > \chi^2_{critical}$
+
+**Our values:**
+- $\chi^2_{calc} = 4.51$
+- $\chi^2_{critical} = 3.841$
+
+**Decision:** _______________
+
+## Example: Conclusion
+
+**Since $4.51 > 3.841$, we REJECT $H_0$**
+
+**Conclusion:**
+- There **is** a statistically significant association between gender and support for the policy
+- The pattern in our sample is unlikely to be due to chance alone
+- Females show higher support (60%) than males (45%)
+
+
+## Berkeley Graduate Admissions 1973
+
+**Did America's most progressive graduate school discriminate on gender in admissions?**
+
+```{r}
+#| label: ucbadmissions
+#| eval: true
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-align: "center"
+
+UCBAdmissions
+ftable(UCBAdmissions)
+
+```
+
+
+## 1973 Berkeley Example Data (Overall)
+
+**Overall admissions (all departments combined)**
+
+|          | Admitted | Rejected | Total |
+|----------|----------|----------|-------|
+| **Male**   |   44    |    56    |  100  |
+| **Female** |   30    |    70    |  100  |
+| **Total**  |   74    |   126    |  200  |
+
+
+## 1973 Berkeley Example Data (By Department)
+
+**Admissions by department (simplified)**
+
+| Dept | Gender | Admitted | Rejected | Total |
+|------|--------|----------|----------|-------|
+| A    | Male   |   40     |   60     |  100  |
+|      | Female |   45     |   55     |  100  |
+| B    | Male   |   30     |   70     |  100  |
+|      | Female |   36     |   64     |  100  |
+| C    | Male   |   30     |   70     |  100  |
+|      | Female |   15     |   85     |  100  |
+
+
+## For this week's quiz points (25 points)
+
+- Complete the crosstabs hypothesis test for the table with admissions by department. (That is a single test with 6 rows by 2 columns)
+
+- Do a crosstab for each department. (That is 3 tests with 2 rows by 2 rows)
+
+- Do this by hand and give your conclusions. 
+
+- More on the next slide
+
+
+
+
+## Part 2
+
+- Bring this to class Thursday or turn it in my mailbox in the Political Science Department office (PGH 447)
+
+- Mostly completion - if you make errors, we will discuss
+
+- Read these and answer three questions in Canvas "March 23-26 Quiz"
+
+        - https://setosa.io/simpsons/
+        - https://statisticsbyjim.com/basics/simpsons-paradox/
+
+
+- We will revisit using R in lab on Thursday!
+
+- I will post Thursday lab Monday or Tuesday evening with recording
+
+
+
+
+
+
+
+
+## Authorship, License, Credits
+
+
+- 68-95-99 rule graphic [Source:https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2)
+
+- Author: Tom Hanna
+
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
+
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](creative_commons_license.png)</a>
+

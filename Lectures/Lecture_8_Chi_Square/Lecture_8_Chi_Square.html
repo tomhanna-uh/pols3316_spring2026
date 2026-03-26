@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tom Hanna">
-<meta name="dcterms.date" content="2026-03-01">
+<meta name="dcterms.date" content="2026-03-22">
 
-<title>Lecture 7: Hypothesis Testing and Confidence Intervals</title>
+<title>Lecture 8: Hypothesis Testing: Z-score and Chi-Square</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -2310,12 +2310,12 @@ window.Quarto = {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture_7_CI_hypothesis_testing.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="lecture_7_CI_hypothesis_testing.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lecture_7_CI_hypothesis_testing.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Lecture_8_Chi_Square.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="Lecture_8_Chi_Square.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="Lecture_8_Chi_Square.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lecture 7: Hypothesis Testing and Confidence Intervals</h1>
+<h1 class="title">Lecture 8: Hypothesis Testing: Z-score and Chi-Square</h1>
 </div>
 
 
@@ -2341,7 +2341,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 1, 2026</p>
+      <p class="date">March 22, 2026</p>
     </div>
   </div>
   
@@ -2357,85 +2357,23 @@ window.Quarto = {
 <h1>Agenda and Announcements</h1>
 <ul>
 <li><p>Today</p>
-<pre><code>  - Hypothesis Testing and Confidence Intervals
+<pre><code>  - Hypothesis Testing: Z-Score and Chi-Square
   - Top Hat Quiz</code></pre></li>
 <li><p>Next class</p>
-<pre><code>  - Lab 3 completion</code></pre></li>
-</ul>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<ul>
-<li><p>Announcements</p>
-<pre><code>  - CASA Registration
-  - No class next Monday or Tuesday (March 10) 
-  - I will record a midterm review and post an online pre-midterm quiz **for points**</code></pre></li>
+<pre><code>  - Lab 4 completion
+  - Lab 5</code></pre></li>
 </ul>
 </section>
-</section>
-<section id="hypothesis-testing" class="level1">
-<h1>Hypothesis testing</h1>
-<section id="what-is-a-hypothesis" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-hypothesis">What is a hypothesis</h2>
-<p>A falsifiable statement about what we believe will happen based on the theory we are trying to test.</p>
-</section>
-<section id="falsifiability" class="level2">
-<h2 class="anchored" data-anchor-id="falsifiability">Falsifiability</h2>
+<section id="hypothesis-testing-z-scores" class="level1">
+<h1>Hypothesis testing Z-Scores</h1>
+<section id="what-is-a-z-score" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-z-score">What is a Z-Score?</h2>
 <ul>
-<li>We start from the assumption that our theory is wrong</li>
-<li>Our hypothesis is called the</li>
+<li>A z-score tells us how many standard deviations a value is from the mean.</li>
+<li>Positive z-scores are above the mean</li>
+<li>Negative z-scores are below the mean</li>
+<li>A z-score is the <strong>precise</strong> representation of the 68-95-99 Rule</li>
 </ul>
-<p><strong>alternative hypothesis</strong> or <strong>H1</strong></p>
-<ul>
-<li>because it is the alternative to our assumption of no relationship</li>
-</ul>
-<p><strong>null hypothesis</strong> or <strong>H0</strong></p>
-</section>
-<section id="testing-the-null-hypothesis" class="level2">
-<h2 class="anchored" data-anchor-id="testing-the-null-hypothesis">Testing the null hypothesis</h2>
-<ul>
-<li>Statistical tests show the degree of certainty that we can reject the null hypothesis</li>
-<li>They show the probability that the alternative hypothesis is due to random chance</li>
-<li>When the probability, <em>p</em>, is below our pre-determined threshold, we reject the null hypothesis</li>
-<li><strong>If we reject the null hypothesis, the alternative hypothesis is true, right?</strong></li>
-</ul>
-</section>
-<section id="no" class="level2">
-<h2 class="anchored" data-anchor-id="no">NO!</h2>
-<ul>
-<li><strong>If we reject the null hypothesis, the alternative hypothesis is true, right?</strong></li>
-</ul>
-<p><strong>NO!!!!</strong></p>
-<ul>
-<li>If we reject the null, we infer that the alternative hypothesis (our hypothesis) is approximately true within the probability we have chosen.</li>
-<li>If we reject the null, we can say there is strong evidence that the alternative hypothesis (our hypothesis) is true</li>
-<li>We often test multiple hypotheses</li>
-</ul>
-</section>
-<section id="how-do-we-get-there" class="level2">
-<h2 class="anchored" data-anchor-id="how-do-we-get-there">How do we get there?</h2>
-<p><strong>How do we get from a sample with a correlation to talking about testing a hypothesis for a population?</strong></p>
-<ul>
-<li>Tying sample statistics to population parameters (LLN)</li>
-<li>Probability distributions</li>
-<li>Tying our data to the probability distributions (CLT)</li>
-</ul>
-</section>
-<section id="statistics-to-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="statistics-to-parameters">Statistics to parameters</h2>
-<ul>
-<li>We rely on the Law of Large Numbers and use sample statistics</li>
-<li>With sufficient sample size and proper math, our sample mean is an unbiased estimator of the population mean</li>
-<li>With CLT, <span class="math inline">\(s^2\)</span> is an unbiased and consistent estimator of <span class="math inline">\(\sigma^2\)</span></li>
-<li>For the normal distribution <span class="math inline">\(s^2\)</span> is also the Minimum Variance Unbiased Estimator for <span class="math inline">\(\sigma^2\)</span></li>
-</ul>
-</section>
-<section id="probability-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="probability-distributions">Probability distributions</h2>
-<p>The <em>68-95-99.7 Rule</em></p>
-<pre><code>            + Allows us to estimate probability based on distance from the mean
-            + Applies to normal distribution
-            + Basis for the actual decision rules
-            </code></pre>
 </section>
 <section id="the-68-95-99.7-rule" class="level2">
 <h2 class="anchored" data-anchor-id="the-68-95-99.7-rule">The 68-95-99.7 Rule</h2>
@@ -2446,46 +2384,322 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="from-distribution-to-confidence" class="level2">
-<h2 class="anchored" data-anchor-id="from-distribution-to-confidence">From Distribution to Confidence</h2>
+<section id="what-is-a-z-score-cont" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-z-score-cont">What is a Z-Score? (cont)</h2>
 <ul>
-<li><p>We can now bridge the gap between probability distributions and our sample data.</p></li>
-<li><p>CLT ties our sample means to the normal distribution</p></li>
-<li><p>Sample stats are unbiased estimators of population parameters</p></li>
-<li><p>They are only <em>point estimates</em>, so we construct a <em>confidence interval</em></p></li>
-<li><p><em>confidence interval</em> a range of values around the <em>point estimate</em> that we are X% confident contains the true population parameter</p></li>
+<li>The actual 95% area under the normal curve is between -1.96 and +1.96 standard deviations from the mean</li>
+<li>The actual 95% area is from z = -1.96 to z = 1.956</li>
+<li>If the area under the curve is 95%, then 5% is outside it in the <strong>two tails</strong></li>
 </ul>
 </section>
-<section id="math-and-philosophy-of-the-confidence-interval" class="level2">
-<h2 class="anchored" data-anchor-id="math-and-philosophy-of-the-confidence-interval">Math and philosophy of the confidence interval</h2>
+<section id="the-tails" class="level2">
+<h2 class="anchored" data-anchor-id="the-tails">The tails</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="two-tail-test" class="level2">
+<h2 class="anchored" data-anchor-id="two-tail-test">Two-tail test</h2>
 <ul>
-<li>Math and philosophy detail: The true population parameter is a fixed but unknown number, while our calculated interval is random but known with certainty. Our X percent confidence reflects the long-run reliability of our method. If we repeated this exact sampling process 100 times, X of the resulting intervals would successfully capture the true population parameter.</li>
+<li>In a hypothesis test, we are testing the probability that the event is not due to random chance</li>
+<li>We set a threshold (usually α = 0.05) for how unlikely a result must be before we reject the null hypothesis</li>
+<li>In a two-tail test, we split α into both tails: α/2 = 0.025 in each tail</li>
+<li>If our test statistic falls in either tail (beyond ±1.96), we reject the null hypothesis</li>
+<li>This corresponds to a probability less than 5% or p &lt; .05</li>
 </ul>
-<hr>
 </section>
-<section id="calculating-the-interval" class="level2">
-<h2 class="anchored" data-anchor-id="calculating-the-interval">Calculating the Interval</h2>
+<section id="z-test-formula" class="level2">
+<h2 class="anchored" data-anchor-id="z-test-formula">Z-Test: Formula</h2>
+<p><strong>Formula:</strong></p>
+<p><span class="math display">\[z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}\]</span></p>
+<p><strong>Where:</strong></p>
 <ul>
-<li><p>we need three pieces of information:</p>
-<pre><code>  - point estimate = sample statistics
-  - standard error = the standard deviation of the sampling distribution
-  - critical value derived from our desired confidence level - for normal distribution this is a z-score
-  - For 95% confidence, the critical z is 1.96</code></pre></li>
-<li><p>The general formula for a confidence interval is:</p></li>
+<li><span class="math inline">\(\bar{x}\)</span> = sample mean</li>
+<li><span class="math inline">\(\mu_0\)</span> = hypothesized population mean (from null hypothesis)</li>
+<li><span class="math inline">\(\sigma\)</span> = population standard deviation</li>
+<li><span class="math inline">\(n\)</span> = sample size</li>
 </ul>
-<p><span class="math display">\[CI = \bar{x} \pm z \left( \frac{s}{\sqrt{n}} \right)\]</span><br>
-## CI of the variance</p>
-<p><span class="math display">\[\frac{(n-1)s^2}{\chi^2_{\alpha/2}} \le \sigma^2 \le \frac{(n-1)s^2}{\chi^2_{1-\alpha/2}}\]</span> - This use the Chi Square distribution which we will discuss after midterm</p>
 </section>
-<section id="ci-of-the-standard-deviation" class="level2">
-<h2 class="anchored" data-anchor-id="ci-of-the-standard-deviation">CI of the standard deviation</h2>
-<p><span class="math display">\[\sqrt{\frac{(n-1)s^2}{\chi^2_{\alpha/2}}} \le \sigma \le \sqrt{\frac{(n-1)s^2}{\chi^2_{1-\alpha/2}}}\]</span> - Also uses the Chi-square distribution</p>
+<section id="z-test-steps" class="level2">
+<h2 class="anchored" data-anchor-id="z-test-steps">Z-Test: Steps</h2>
+<p><strong>Steps:</strong></p>
+<ol type="1">
+<li>State your null hypothesis (<span class="math inline">\(H_0: \mu = \mu_0\)</span>) and alternative hypothesis (<span class="math inline">\(H_a\)</span>)</li>
+<li>Calculate the test statistic using the formula above</li>
+<li>For a two-tail test at <span class="math inline">\(\alpha = 0.05\)</span>, the critical values are <span class="math inline">\(z = \pm 1.96\)</span></li>
+</ol>
 </section>
-<section id="why-the-chi-square-not-the-normal" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-chi-square-not-the-normal">Why the Chi-Square not the normal?</h2>
+<section id="z-test-decision-rule" class="level2">
+<h2 class="anchored" data-anchor-id="z-test-decision-rule">Z-test: Decision rule</h2>
+<p>Two tail:</p>
 <ul>
-<li>When we square distances from the mean to get the variance, the distribution changes</li>
-<li>By eliminating all negative numbers, the distribution becomes skewed and looks like this:</li>
+<li><strong>Reject</strong> <span class="math inline">\(H_0\)</span> if <span class="math inline">\(z &gt; 1.96\)</span> or <span class="math inline">\(z &lt; -1.96\)</span></li>
+<li><strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span> if <span class="math inline">\(-1.96 \le z \le 1.96\)</span></li>
+<li>Shorthand: reject if <span class="math inline">\(|z| &gt; 1.96\)</span></li>
+</ul>
+</section>
+<section id="z-tail-right-tail-decision-rule" class="level2">
+<h2 class="anchored" data-anchor-id="z-tail-right-tail-decision-rule">Z-tail: Right tail decision rule</h2>
+<p><strong>Right-tail test</strong> (<span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>)</p>
+<ul>
+<li>Critical value: <span class="math inline">\(z_{critical} = 1.645\)</span></li>
+<li>Decision rule:
+<ul>
+<li><strong>Reject</strong> <span class="math inline">\(H_0\)</span> if <span class="math inline">\(z &gt; 1.645\)</span></li>
+<li><strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span> if <span class="math inline">\(z \le 1.645\)</span></li>
+<li>Shorthand: reject if <span class="math inline">\(z\)</span> is in the <strong>right tail</strong> beyond 1.645</li>
+</ul></li>
+</ul>
+</section>
+<section id="z-tail-left-tail-decision-rule" class="level2">
+<h2 class="anchored" data-anchor-id="z-tail-left-tail-decision-rule">Z-tail: Left-tail decision rule</h2>
+<p><strong>Left-tail test</strong> (<span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>)</p>
+<ul>
+<li>Critical value: <span class="math inline">\(z_{critical} = -1.645\)</span></li>
+<li>Decision rule:
+<ul>
+<li><strong>Reject</strong> <span class="math inline">\(H_0\)</span> if <span class="math inline">\(z &lt; -1.645\)</span></li>
+<li><strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span> if <span class="math inline">\(z \ge -1.645\)</span></li>
+<li>Shorthand: reject if <span class="math inline">\(z\)</span> is in the <strong>left tail</strong> beyond -1.645</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-is-a-crosstab" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-crosstab">What is a Crosstab?</h2>
+<ul>
+<li>A <strong>crosstab</strong> (contingency table) shows counts for two categorical variables in rows and columns</li>
+<li>Each cell contains the <strong>frequency</strong> of cases with that combination of categories</li>
+</ul>
+</section>
+<section id="example-crosstab" class="level2">
+<h2 class="anchored" data-anchor-id="example-crosstab">Example Crosstab</h2>
+<p><strong>Example structure (2×3 table):</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Category 1</th>
+<th>Category 2</th>
+<th>Category 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Group A</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr class="even">
+<td>Group B</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-observed-counts-only" class="level2">
+<h2 class="anchored" data-anchor-id="example-observed-counts-only">Example: Observed Counts Only</h2>
+<p><strong>Research Question:</strong> Is there an association between gender and support for a new campus policy?</p>
+<p><strong>Observed data from 200 students:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Support</th>
+<th>Oppose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Female</strong></td>
+<td>60</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>45</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-add-row-and-column-totals" class="level2">
+<h2 class="anchored" data-anchor-id="example-add-row-and-column-totals">Example: Add Row and Column Totals</h2>
+<p><strong>Fill in the marginals (row totals, column totals, and grand total):</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Support</th>
+<th>Oppose</th>
+<th>Row Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Female</strong></td>
+<td>60</td>
+<td>40</td>
+<td>___</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>45</td>
+<td>55</td>
+<td>___</td>
+</tr>
+<tr class="odd">
+<td><strong>Column Total</strong></td>
+<td>___</td>
+<td>___</td>
+<td>**___**</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-completed-observed-table" class="level2">
+<h2 class="anchored" data-anchor-id="example-completed-observed-table">Example: Completed Observed Table</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Support</th>
+<th>Oppose</th>
+<th>Row Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Female</strong></td>
+<td>60</td>
+<td>40</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>45</td>
+<td>55</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td><strong>Column Total</strong></td>
+<td>105</td>
+<td>95</td>
+<td><strong>200</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-calculate-expected-counts" class="level2">
+<h2 class="anchored" data-anchor-id="example-calculate-expected-counts">Example: Calculate Expected Counts</h2>
+<p><strong>Formula:</strong> <span class="math inline">\(E_{ij} = \frac{(\text{row total}) \times (\text{column total})}{\text{grand total}}\)</span></p>
+<p><strong>Calculate expected count for each cell:</strong></p>
+<ul>
+<li>Female &amp; Support: <span class="math inline">\(E_{11} = \frac{100 \times 105}{200} = \_\_\_\)</span></li>
+<li>Female &amp; Oppose: <span class="math inline">\(E_{12} = \frac{100 \times 95}{200} = \_\_\_\)</span></li>
+<li>Male &amp; Support: <span class="math inline">\(E_{21} = \frac{100 \times 105}{200} = \_\_\_\)</span></li>
+<li>Male &amp; Oppose: <span class="math inline">\(E_{22} = \frac{100 \times 95}{200} = \_\_\_\)</span></li>
+</ul>
+</section>
+<section id="example-expected-counts-table" class="level2">
+<h2 class="anchored" data-anchor-id="example-expected-counts-table">Example: Expected Counts Table</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Support</th>
+<th>Oppose</th>
+<th>Row Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Female</strong></td>
+<td>52.5</td>
+<td>47.5</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>52.5</td>
+<td>47.5</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td><strong>Column Total</strong></td>
+<td>105</td>
+<td>95</td>
+<td><strong>200</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>These are the counts we would expect if there were NO association</strong></p>
+</section>
+<section id="example-calculate-o---e-for-each-cell" class="level2">
+<h2 class="anchored" data-anchor-id="example-calculate-o---e-for-each-cell">Example: Calculate (O - E) for Each Cell</h2>
+<p><strong>For each cell, compute:</strong> Observed - Expected</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Support</th>
+<th>Oppose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Female</strong></td>
+<td>60 - 52.5 = ___</td>
+<td>40 - 47.5 = ___</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>45 - 52.5 = ___</td>
+<td>55 - 47.5 = ___</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-differences-o---e" class="level2">
+<h2 class="anchored" data-anchor-id="example-differences-o---e">Example: Differences (O - E)</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Support</th>
+<th>Oppose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Female</strong></td>
+<td>+7.5</td>
+<td>-7.5</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>-7.5</td>
+<td>+7.5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note the symmetry:</strong> Differences sum to zero in each row and column</p>
+</section>
+<section id="where-did-we-run-into-this-before" class="level2">
+<h2 class="anchored" data-anchor-id="where-did-we-run-into-this-before">Where did we run into this before?</h2>
+<ul>
+<li>Variance</li>
+<li>When we talked about computing confidence intervals, squaring deviations meant we couldn’t use the normal distribution</li>
+<li>That meant we couldn’t use a z-score there</li>
+<li>What distribution did we have to use?</li>
 </ul>
 </section>
 <section id="distribution-comparison" class="level2">
@@ -2500,10 +2714,295 @@ window.Quarto = {
 </div>
 </div>
 </section>
+<section id="χ²-instead-of-z-score" class="level2">
+<h2 class="anchored" data-anchor-id="χ²-instead-of-z-score">χ² instead of z-score</h2>
+<ul>
+<li>Here we will use the <strong>χ²</strong> statistic instead of the z-score</li>
+<li>The z-score is always based on the <strong>same</strong> normal distribution</li>
+<li>The chi-square is not just one curve: we pick a specific <strong>χ² distribution</strong> based on the degrees of freedom</li>
+</ul>
+</section>
+<section id="what-is-degrees-of-freedom" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-degrees-of-freedom">What is degrees of freedom?</h2>
+<ul>
+<li>Chi-square shows up whenever we add up <strong>squared differences between what we observe and what we expect</strong></li>
+<li>These are also called <strong>squared residuals</strong></li>
+<li>The <strong>degrees of freedom</strong> tell us how many <strong>independent pieces</strong> of information went into that total</li>
+<li>In a crosstab, fixing the row and column totals means not every cell can vary freely, so the df is <span class="math inline">\((r - 1)(c - 1)\)</span></li>
+<li>So instead of one universal z table, we have a family of χ² tables—one curve for each degrees-of-freedom value.</li>
+</ul>
+</section>
+<section id="χ²-critical-values-α-0.05" class="level2">
+<h2 class="anchored" data-anchor-id="χ²-critical-values-α-0.05">χ² Critical Values (α = 0.05)</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>df</th>
+<th>χ² critical (α = 0.05)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3.84</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>5.99</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>7.82</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>9.49</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>11.07</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>12.59</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-next-step" class="level2">
+<h2 class="anchored" data-anchor-id="example-next-step">Example: next step</h2>
+<p><strong>Calculate <span class="math inline">\(\frac{(O - E)^2}{E}\)</span> for Each Cell</strong></p>
+<p><span class="math display">\[\chi^2 = \sum \frac{(O - E)^2}{E}\]</span></p>
+<p><strong>Female &amp; Support:</strong> <span class="math inline">\(\frac{(7.5)^2}{52.5} = \frac{56.25}{52.5} = \_\_\_\)</span></p>
+<p><strong>Female &amp; Oppose:</strong> <span class="math inline">\(\frac{(-7.5)^2}{47.5} = \frac{56.25}{47.5} = \_\_\_\)</span></p>
+<p><strong>Male &amp; Support:</strong> <span class="math inline">\(\frac{(-7.5)^2}{52.5} = \frac{56.25}{52.5} = \_\_\_\)</span></p>
+<p><strong>Male &amp; Oppose:</strong> <span class="math inline">\(\frac{(7.5)^2}{47.5} = \frac{56.25}{47.5} = \_\_\_\)</span></p>
+</section>
+<section id="example-chi-square-components" class="level2">
+<h2 class="anchored" data-anchor-id="example-chi-square-components">Example: Chi-Square Components</h2>
+<p><strong>Female &amp; Support:</strong> <span class="math inline">\(\frac{56.25}{52.5} = 1.071\)</span></p>
+<p><strong>Female &amp; Oppose:</strong> <span class="math inline">\(\frac{56.25}{47.5} = 1.184\)</span></p>
+<p><strong>Male &amp; Support:</strong> <span class="math inline">\(\frac{56.25}{52.5} = 1.071\)</span></p>
+<p><strong>Male &amp; Oppose:</strong> <span class="math inline">\(\frac{56.25}{47.5} = 1.184\)</span></p>
+<p><strong>Sum all four:</strong> <span class="math inline">\(\chi^2 = 1.071 + 1.184 + 1.071 + 1.184 = \_\_\_\)</span></p>
+</section>
+<section id="example-chi-square-test-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="example-chi-square-test-statistic">Example: Chi-Square Test Statistic</h2>
+<p><span class="math display">\[\chi^2_{calc} = 4.51\]</span></p>
+<p><strong>Now we need to compare this to the critical value</strong></p>
+</section>
+<section id="example-find-degrees-of-freedom" class="level2">
+<h2 class="anchored" data-anchor-id="example-find-degrees-of-freedom">Example: Find Degrees of Freedom</h2>
+<p><span class="math display">\[df = (r - 1)(c - 1)\]</span></p>
+<ul>
+<li>Number of rows: <span class="math inline">\(r = \_\_\_\)</span></li>
+<li>Number of columns: <span class="math inline">\(c = \_\_\_\)</span></li>
+</ul>
+<p><span class="math display">\[df = (\_\_\_ - 1)(\_\_\_ - 1) = \_\_\_\]</span></p>
+</section>
+<section id="example-degrees-of-freedom" class="level2">
+<h2 class="anchored" data-anchor-id="example-degrees-of-freedom">Example: Degrees of Freedom</h2>
+<p><span class="math display">\[df = (r - 1)(c - 1)\]</span></p>
+<ul>
+<li>Number of rows: <span class="math inline">\(r = 2\)</span></li>
+<li>Number of columns: <span class="math inline">\(c = 2\)</span></li>
+</ul>
+<p><span class="math display">\[df = (2 - 1)(2 - 1) = 1\]</span></p>
+</section>
+<section id="example-critical-value" class="level2">
+<h2 class="anchored" data-anchor-id="example-critical-value">Example: Critical Value</h2>
+<p><strong>From chi-square distribution table:</strong></p>
+<ul>
+<li><span class="math inline">\(df = 1\)</span></li>
+<li><span class="math inline">\(\alpha = 0.05\)</span></li>
+<li><span class="math inline">\(\chi^2_{critical} = 3.841\)</span></li>
+</ul>
+</section>
+<section id="example-make-decision" class="level2">
+<h2 class="anchored" data-anchor-id="example-make-decision">Example: Make Decision</h2>
+<p><strong>Decision rule:</strong> Reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(\chi^2_{calc} &gt; \chi^2_{critical}\)</span></p>
+<p><strong>Our values:</strong> - <span class="math inline">\(\chi^2_{calc} = 4.51\)</span> - <span class="math inline">\(\chi^2_{critical} = 3.841\)</span></p>
+<p><strong>Decision:</strong> _______________</p>
+</section>
+<section id="example-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="example-conclusion">Example: Conclusion</h2>
+<p><strong>Since <span class="math inline">\(4.51 &gt; 3.841\)</span>, we REJECT <span class="math inline">\(H_0\)</span></strong></p>
+<p><strong>Conclusion:</strong> - There <strong>is</strong> a statistically significant association between gender and support for the policy - The pattern in our sample is unlikely to be due to chance alone - Females show higher support (60%) than males (45%)</p>
+</section>
+<section id="berkeley-graduate-admissions-1973" class="level2">
+<h2 class="anchored" data-anchor-id="berkeley-graduate-admissions-1973">Berkeley Graduate Admissions 1973</h2>
+<p><strong>Did America’s most progressive graduate school discriminate on gender in admissions?</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>, , Dept = A
+
+          Gender
+Admit      Male Female
+  Admitted  512     89
+  Rejected  313     19
+
+, , Dept = B
+
+          Gender
+Admit      Male Female
+  Admitted  353     17
+  Rejected  207      8
+
+, , Dept = C
+
+          Gender
+Admit      Male Female
+  Admitted  120    202
+  Rejected  205    391
+
+, , Dept = D
+
+          Gender
+Admit      Male Female
+  Admitted  138    131
+  Rejected  279    244
+
+, , Dept = E
+
+          Gender
+Admit      Male Female
+  Admitted   53     94
+  Rejected  138    299
+
+, , Dept = F
+
+          Gender
+Admit      Male Female
+  Admitted   22     24
+  Rejected  351    317</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Dept   A   B   C   D   E   F
+Admit    Gender                             
+Admitted Male        512 353 120 138  53  22
+         Female       89  17 202 131  94  24
+Rejected Male        313 207 205 279 138 351
+         Female       19   8 391 244 299 317</code></pre>
+</div>
+</div>
+</section>
+<section id="berkeley-example-data-overall" class="level2">
+<h2 class="anchored" data-anchor-id="berkeley-example-data-overall">1973 Berkeley Example Data (Overall)</h2>
+<p><strong>Overall admissions (all departments combined)</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Admitted</th>
+<th>Rejected</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Male</strong></td>
+<td>44</td>
+<td>56</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td><strong>Female</strong></td>
+<td>30</td>
+<td>70</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>74</td>
+<td>126</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="berkeley-example-data-by-department" class="level2">
+<h2 class="anchored" data-anchor-id="berkeley-example-data-by-department">1973 Berkeley Example Data (By Department)</h2>
+<p><strong>Admissions by department (simplified)</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dept</th>
+<th>Gender</th>
+<th>Admitted</th>
+<th>Rejected</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>Male</td>
+<td>40</td>
+<td>60</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Female</td>
+<td>45</td>
+<td>55</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>B</td>
+<td>Male</td>
+<td>30</td>
+<td>70</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Female</td>
+<td>36</td>
+<td>64</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>Male</td>
+<td>30</td>
+<td>70</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Female</td>
+<td>15</td>
+<td>85</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="for-this-weeks-quiz-points-25-points" class="level2">
+<h2 class="anchored" data-anchor-id="for-this-weeks-quiz-points-25-points">For this week’s quiz points (25 points)</h2>
+<ul>
+<li><p>Complete the crosstabs hypothesis test for the table with admissions by department. (That is a single test with 6 rows by 2 columns)</p></li>
+<li><p>Do a crosstab for each department. (That is 3 tests with 2 rows by 2 rows)</p></li>
+<li><p>Do this by hand and give your conclusions.</p></li>
+<li><p>More on the next slide</p></li>
+</ul>
+</section>
+<section id="part-2" class="level2">
+<h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
+<ul>
+<li><p>Bring this to class Thursday or turn it in my mailbox in the Political Science Department office (PGH 447)</p></li>
+<li><p>Mostly completion - if you make errors, we will discuss</p></li>
+<li><p>Read these and answer three questions in Canvas “March 23-26 Quiz”</p>
+<pre><code>  - https://setosa.io/simpsons/
+  - https://statisticsbyjim.com/basics/simpsons-paradox/</code></pre></li>
+<li><p>We will revisit using R in lab on Thursday!</p></li>
+<li><p>I will post Thursday lab Monday or Tuesday evening with recording</p></li>
+</ul>
+</section>
 <section id="authorship-license-credits" class="level2">
 <h2 class="anchored" data-anchor-id="authorship-license-credits">Authorship, License, Credits</h2>
 <ul>
-<li><p><a href="https://rpubs.com/stephenmoore56/301283">Stephen Moore</a> code used to simulate the Law of Large Numbers</p></li>
 <li><p>68-95-99 rule graphic <a href="https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2">Source:https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2</a></p></li>
 <li><p>Author: Tom Hanna</p></li>
 <li><p>Website: <a href="https://tom-hanna.org/">tomhanna.me</a></p></li>

@@ -17,6 +17,14 @@ copyright:
   year: 2026
 date: today
 format: 
+        html:
+                theme: cosmo
+                style: custom.css
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         docx:
                 toc: true
                 number-sections: true
@@ -36,14 +44,6 @@ format:
                 preview-links: true 
                 logo: ../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
-        html:
-                theme: cosmo
-                style: custom.css
-                axe: true
-                self-contained: true
-                code-fold: false
-                logo: ../logo.png
-                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
 ---
 
 # Agenda and Announcements

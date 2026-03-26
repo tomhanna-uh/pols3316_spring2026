@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: More Data Loading and Data Visualization"
+title: "Lab 4: Correlation, Covariance, Correlation Matrix Plotting"
 author: 
   - name: Tom Hanna
     id: th

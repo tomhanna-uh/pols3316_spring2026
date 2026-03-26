@@ -1,0 +1,486 @@
+---
+title: "Lab 5: Z-Tests, Crosstabs, and the 1973 Berkeley Example"
+author:
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation:
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright:
+  holder: Tom Hanna
+  year: 2026
+date: today
+format:
+  docx:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    highlight-style: github
+    page-width: 6.5
+from: markdown-smart
+execute:
+  echo: true
+  eval: false
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    tidy: true
+    tidy.opts:
+      width.cutoff: 70
+---
+
+## Getting ready
+
+### Proper project
+
+Be sure you are in the project for the class github repository. You can check this by looking at the top of the RStudio window, it should show the name of the project as `"pols3316_spring2026"`. If not, you can open the project by going to `File > Open Project` and selecting the `pols3316_spring2026.Rproj` file in the folder where you cloned the repository or by going to `File > Recent Projects` and selecting it from the list.
+
+### Clear the console and environment
+
+Next, we are going to clear the console and remove all objects from the environment.
+
+To clear the console, you can use the shortcut `Ctrl + L` (Windows/Linux) or `Cmd + L` (Mac).
+
+To clear the environment, you can use the broom icon in the upper right or use following command in R by typing it in the console:
+
+```r
+# this command erases all objects from the environment
+
+rm(list = ls())
+
+```
+
+## Git Pull
+
+Last, we are going to do a "Git Pull" to update the local repository with the latest material from the class github repository on GitHub.
+
+You can do this by going to the "Git" tab in the upper right pane of RStudio and clicking the "Pull" button or by using the following command in R by typing it in the console:
+
+```
+# this executes a git pull
+
+system("git pull")
+``` 
+
+
+If you get errors refer to the instructions for handling errors in Lab 3. (I will not repeat them here as some people were running them when they had no errors.)
+
+Now, let's create a new R script file for this lab. You can do this by going to File > New File > R Script. Save the new file in your My_Labs folder with the name lab_8.R. (If you named your folder something different, just save it there.)
+
+# Part 1: One-sample Z-Test
+
+In this part of the lab, you will compute a one-sample z-test by hand (in R) and then compare it to what we would get from the z-table.
+
+Imagine a standardized test where the population mean score is assumed to be 500 with a known population standard deviation of 100. You collect a sample of 64 students and find that their average score is 530.
+
+We want to test:
+
+$H_0: \mu = 500$
+
+$H_a: \mu \neq 500$
+
+at $\alpha = 0.05$.
+
+## Step 1: Store the values in R
+Start by storing these values as R objects:
+
+
+```
+# store the known values for the z-test example
+
+mu_0   <- 500   # hypothesized population mean
+sigma  <- 100   # known population standard deviation
+n      <- 64    # sample size
+xbar   <- 530   # sample mean
+
+alpha  <- 0.05  # significance level
+
+```
+
+
+## Step 2: Compute the z-test statistic
+
+Recall the z-test formula:
+
+\[
+z = \frac{x - \mu}{\sigma}
+\]
+
+
+Use R to compute the test statistic:
+
+
+```
+# compute the standard error
+
+se <- sigma / sqrt(n)
+
+# compute the z statistic
+
+z_stat <- (xbar - mu_0) / se
+
+z_stat
+```
+
+## Step 3: Find the p-value (two-tail test)
+
+For a two-tail test, the p-value is:
+
+p-value=2×P(Z>∣z∣)
+
+where $Z$ is a standard normal random variable.
+
+```
+# compute the two-tail p-value
+
+p_value <- 2 * (1 - pnorm(abs(z_stat)))
+
+p_value
+```
+
+## Step 4: Compare to the critical values
+
+
+For a two-tail test at $\alpha = 0.05$, the critical values are approximately $z = \pm 1.96$.
+
+The following code uses the qnorm() function, which is one of a family of normal-distribution helpers in R. The dnorm() function returns the density (height of the normal curve) at a given value, pnorm() returns the cumulative probability up to a value, qnorm() gives the quantile (z- or x-value) corresponding to a given cumulative probability, and rnorm() generates random draws from a normal distribution. For more details on the arguments and options for these functions, students can consult R’s built-in help pages by running ?Normal or help(\"Normal\") in the Console.
+
+The "quantile" in this case gives us our critical values.
+
+```
+# critical values for a two-tail z-test at alpha = 0.05
+
+z_crit_lower <- qnorm(alpha / 2)        # about -1.96
+z_crit_upper <- qnorm(1 - alpha / 2)    # about  1.96
+
+z_crit_lower
+z_crit_upper
+```
+
+Decision rule: Reject $H_0$ if $z < z_{crit_lower}$ or $z > z_{crit_upper}$.
+
+```
+# check the decision rule
+
+z_stat
+z_crit_lower
+z_crit_upper
+```
+
+**In your script, add a comment stating whether you would reject or fail to reject $H_0$, and briefly explain why in one sentence.**
+
+# Step 5 (Optional): Simple z-test helper function
+
+If you want to practice function writing, you can create a simple helper function that performs this z-test given $\bar{x}$, $\mu_0$, $\sigma$, and $n$.
+
+```
+# optional: simple one-sample z-test function
+
+z_test_one_sample <- function(xbar, mu0, sigma, n, alpha = 0.05) {
+  se <- sigma / sqrt(n)
+  z  <- (xbar - mu0) / se
+  p  <- 2 * (1 - pnorm(abs(z)))
+  
+  list(
+    z_stat    = z,
+    p_value   = p,
+    reject_H0 = (p < alpha)
+  )
+}
+
+# test the function with our example
+
+z_test_one_sample(xbar = xbar, mu0 = mu_0, sigma = sigma, n = n, alpha = alpha)
+
+
+```
+
+You do not have to use this function if you are not comfortable with it. The main goal is to understand the steps.
+
+# Part 2: 1973 Berkeley Admissions (Full Data and Simpson's Paradox)
+
+In this part of the lab, we will use the full 1973 UC Berkeley graduate admissions data that is built into R in the datasets package as UCBAdmissions. This dataset contains:
+
+6 departments (A–F)
+
+Gender (Male, Female)
+
+Admission outcome (Admitted, Rejected)
+
+You have already seen simplified versions of this example in class. Here, we let R handle the full data.
+
+# Step 1: Load and inspect the data
+
+The UCBAdmissions object is a 3-dimensional contingency table with:
+
+- Dimension 1: Admit (Admitted / Rejected)
+
+- Dimension 2: Gender (Male / Female)
+
+- Dimension 3: Dept (A–F)
+
+```
+# UCBAdmissions is in the base datasets package
+
+data(UCBAdmissions)
+
+UCBAdmissions
+str(UCBAdmissions)
+```
+
+To make it easier to work with, we will convert it to a data frame.
+
+```
+# convert the 3D table to a data frame
+
+ucb_df <- as.data.frame(UCBAdmissions)
+
+head(ucb_df)
+```
+
+You should see columns: Admit, Gender, Dept, and Freq (the counts).
+
+## Step 2: Overall Gender × Admit table
+
+First, we ignore departments and just look at the overall association between Gender and Admit, which is similar to what a naïve crosstab would show.
+
+```
+# overall Gender x Admit table (ignoring department)
+
+overall_tab <- xtabs(Freq ~ Gender + Admit, data = ucb_df)
+
+overall_tab
+```
+
+Run a chi-square test of independence:
+
+```
+# chi-square test for overall Gender x Admit
+
+chisq_overall <- chisq.test(overall_tab, correct = FALSE)
+
+chisq_overall
+
+```
+
+In your script, add a brief comment answering:
+
+What does the overall table suggest about the relationship between gender and admission?
+
+Based on the p-value, do we reject or fail to reject the null hypothesis that Gender and Admit are independent?
+
+
+## Step 3: Dept × Gender × Admit table
+
+Now we bring departments back in. The original object UCBAdmissions already has the 3-way table, but we can also reconstruct it from ucb_df to make the formula visible:
+
+```
+# 3D table: Admit x Gender x Dept (this is essentially UCBAdmissions again)
+
+table_3d <- xtabs(Freq ~ Admit + Gender + Dept, data = ucb_df)
+
+table_3d
+
+```
+
+For each department, we can look at the 2×2 table of Admit × Gender.
+
+
+```
+# example: Dept A
+
+dept_A <- table_3d[, , "A"]
+dept_A
+
+# Dept B
+
+dept_B <- table_3d[, , "B"]
+dept_B
+
+# Dept C
+
+dept_C <- table_3d[, , "C"]
+dept_C
+
+# You can also check D, E, F if you like
+
+dept_D <- table_3d[, , "D"]
+dept_E <- table_3d[, , "E"]
+dept_F <- table_3d[, , "F"]
+```
+
+## Step 4: Admit rates within each department
+
+We will compute the admit rate for each gender within each department. To make this easier, write a small helper function.
+
+```
+# helper function: admit rates by Gender from an Admit x Gender table
+
+admit_rates <- function(tab_AG) {
+  # tab_AG: rows = Admit (Admitted/Rejected), columns = Gender (Male/Female)
+  admitted <- tab_AG["Admitted", ]
+  totals   <- colSums(tab_AG)
+  rates    <- admitted / totals
+  return(rates)
+}
+
+# admit rates for each department A–F
+
+rates_A <- admit_rates(dept_A)
+rates_B <- admit_rates(dept_B)
+rates_C <- admit_rates(dept_C)
+rates_D <- admit_rates(dept_D)
+rates_E <- admit_rates(dept_E)
+rates_F <- admit_rates(dept_F)
+
+rates_A
+rates_B
+rates_C
+rates_D
+rates_E
+rates_F
+```
+
+In your script, add comments describing, for each of A–F:
+
+Is the admit rate higher for men, higher for women, or similar?
+
+(You do not need full sentences, just short notes like “Dept A: women higher”, etc.)
+
+## Step 5: Chi-square tests within departments
+
+Now we test Admit × Gender within each department separately using chi-square tests.
+
+```
+# chi-square tests within each department
+
+chisq_A <- chisq.test(dept_A, correct = FALSE)
+chisq_B <- chisq.test(dept_B, correct = FALSE)
+chisq_C <- chisq.test(dept_C, correct = FALSE)
+chisq_D <- chisq.test(dept_D, correct = FALSE)
+chisq_E <- chisq.test(dept_E, correct = FALSE)
+chisq_F <- chisq.test(dept_F, correct = FALSE)
+
+chisq_A
+chisq_B
+chisq_C
+chisq_D
+chisq_E
+chisq_F
+```
+
+Look at the p-values. In your script, add a brief comment:
+
+In how many departments does the chi-square test suggest a significant association between Gender and Admit at $\alpha = 0.05$?
+
+## Step 6: Connecting to Simpson’s Paradox
+
+Now compare:
+
+The overall Gender × Admit chi-square test (Step 2), and
+
+The within-department patterns (Steps 4 and 5).
+
+In your lab_8.R script or in a short paragraph document, answer:
+
+What conclusion would you draw if you only looked at the overall 2×2 table of Gender × Admit?
+
+How does that conclusion change when you look within departments?
+
+In your own words, how does this illustrate the idea behind Simpson’s paradox (that aggregation can reverse or hide patterns present within groups)?
+
+
+## Assignment for Lab 8
+
+For this and future labs, you will **present your results professionally** in a short Word (or PDF) document, not just by uploading R scripts.
+
+### Part 1: One-sample Z-Test (Provided Example)
+
+Using the standardized test example from Part 1:
+
+1. In your `lab_8.R` script:
+   - Complete all the code to compute:
+     - The standard error
+     - The z statistic
+     - The two-tail p-value
+     - The critical values at $\alpha = 0.05$ (±1.96)
+   - Add brief comments indicating:
+     - The null and alternative hypotheses
+     - Whether you reject or fail to reject $H_0$, and why (in one sentence)
+
+2. In a separate Word (or PDF) document:
+   - Include a short section titled **“Part 1: One-Sample Z-Test”**
+   - Clearly report:
+     - Sample mean ($\bar{x}$), hypothesized mean ($\mu_0$), $\sigma$, $n$
+     - Computed z statistic (rounded to 2 decimal places)
+     - p-value (rounded to 3 decimal places)
+     - Decision at $\alpha = 0.05$ (reject or fail to reject $H_0$)
+   - Write 2–3 sentences interpreting the result **in words**, as if explaining it to a non-technical audience (e.g., “There is/is not evidence that the average score differs from 500.”)
+
+You do **not** need to paste R code into the Word document; focus on **clean tables and prose**.
+
+### Part 2: 1973 Berkeley Admissions (Full Data)
+
+Using the `UCBAdmissions` data from Part 2:
+
+1. In your `lab_8.R` script:
+   - Produce the overall Gender × Admit table (`overall_tab`)
+   - Run the overall chi-square test (`chisq_overall`)
+   - Extract and display the admit rates by gender for each department (A–F)
+   - Run the chi-square test within each department (`chisq_A`–`chisq_F`)
+
+2. In your Word (or PDF) document:
+   - Add a section titled **“Part 2: Berkeley Admissions (1973)”**
+   - Include:
+     - A **neatly formatted table** of the overall Gender × Admit counts (2×2)
+     - A **neatly formatted table** of admit rates by gender for each department (A–F); e.g., rows = departments, columns = male admit rate, female admit rate
+     - A short summary of the chi-square results:
+       - The overall chi-square statistic, df, and p-value
+       - A brief note on whether each department-level test is significant (you can list them in a simple bullet list)
+   - Write a short paragraph (4–6 sentences) that:
+     - Explains what the overall 2×2 table suggests about gender and admission
+     - Explains what you see when you look within departments
+     - Connects this to the idea of **Simpson’s paradox** in your own words
+
+### Part 3: Connecting to Your Own Data (Project Prep)
+
+For your semester project, you will eventually provide **descriptive statistics** and **simple regression results** (or appropriate crosstabs) using your own dataset.
+
+For this lab:
+
+In your Word (or PDF) document:
+   
+- Add a section titled **“Part 3: My Project Data (Preview)”**
+- Include:
+
+     - A brief description of your dataset (1–2 sentences: what is it about, where is it from)
+     - A small table of descriptive statistics for your main variables (e.g., mean, sd, min, max for numeric; counts/percentages for categorical) *Note: You should have already completed this in Lab 3. You can copy it here.*
+     - A sentence describing what a **z-score** means in the context of your Y variable (e.g., “A z-score of 1.5 on income means the observation is 1.5 standard deviations above the sample mean income.”).
+    
+     
+- Write 2–3 sentences explaining:
+     
+        - What relationship you are **interested in studying** in your project (e.g., “Does X appear to be related to Y?”)
+        - How the correlation and covariance you produced in Lab 4 give a first look at this relationship. 
+        - If the correlation seems weak, do scatterplots indicate that the relationship might be nonlinear?
+        - Include the table of correlation and covariance you made in Lab 4.
+        - Include any appropriate plots that fit this part. 
+
+### What to Upload
+
+Please upload one file to Canvas for Lab 8:
+
+A Word or PDF document titled something like `Lab_8_Lastname_Firstname` that contains:
+
+   - Part 1: One-sample z-test results and interpretation
+   - Part 2: Berkeley admissions tables, chi-square results, and interpretation
+   - Part 3: Brief description and initial summary (descriptives, crosstab, or simple regression) of your own project data
+
+
