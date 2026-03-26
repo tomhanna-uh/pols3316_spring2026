@@ -109,9 +109,10 @@ alpha  <- 0.05  # significance level
 
 Recall the z-test formula:
 
-\[
-z = \frac{x - \mu}{\sigma}
-\]
+$$
+Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}
+$$
+
 
 
 Use R to compute the test statistic:
@@ -333,12 +334,12 @@ admit_rates <- function(tab_AG) {
 
 # admit rates for each department A–F
 
-rates_A <- admit_rates(dept_A)
-rates_B <- admit_rates(dept_B)
-rates_C <- admit_rates(dept_C)
-rates_D <- admit_rates(dept_D)
-rates_E <- admit_rates(dept_E)
-rates_F <- admit_rates(dept_F)
+rates_A <- admit_rates(table_3d[ , , "A"])
+rates_B <- admit_rates(table_3d[ , , "B"])
+rates_C <- admit_rates(table_3d[ , , "C"])
+rates_D <- admit_rates(table_3d[ , , "D"])
+rates_E <- admit_rates(table_3d[ , , "E"])
+rates_F <- admit_rates(table_3d[ , , "F"])
 
 rates_A
 rates_B
@@ -361,12 +362,12 @@ Now we test Admit × Gender within each department separately using chi-square t
 ```
 # chi-square tests within each department
 
-chisq_A <- chisq.test(dept_A, correct = FALSE)
-chisq_B <- chisq.test(dept_B, correct = FALSE)
-chisq_C <- chisq.test(dept_C, correct = FALSE)
-chisq_D <- chisq.test(dept_D, correct = FALSE)
-chisq_E <- chisq.test(dept_E, correct = FALSE)
-chisq_F <- chisq.test(dept_F, correct = FALSE)
+chisq_A <- chisq.test(table_3d[ , , "A"], correct = FALSE)
+chisq_B <- chisq.test(table_3d[ , , "B"], correct = FALSE)
+chisq_C <- chisq.test(table_3d[ , , "C"], correct = FALSE)
+chisq_D <- chisq.test(table_3d[ , , "D"], correct = FALSE)
+chisq_E <- chisq.test(table_3d[ , , "E"], correct = FALSE)
+chisq_F <- chisq.test(table_3d[ , , "F"], correct = FALSE)
 
 chisq_A
 chisq_B
