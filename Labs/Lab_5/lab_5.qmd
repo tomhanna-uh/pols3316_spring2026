@@ -158,11 +158,12 @@ The "quantile" in this case gives us our critical values.
 ```
 # critical values for a two-tail z-test at alpha = 0.05
 
-z_crit_lower <- qnorm(alpha / 2)        # about -1.96
-z_crit_upper <- qnorm(1 - alpha / 2)    # about  1.96
+alpha <- 0.05
+z_crit <- qnorm(1 - alpha/2)  # 1.959964
+crit_values <- c(-z_crit, z_crit)       
 
-z_crit_lower
-z_crit_upper
+crit_values
+
 ```
 
 Decision rule: Reject $H_0$ if $z < z_{crit_lower}$ or $z > z_{crit_upper}$.
