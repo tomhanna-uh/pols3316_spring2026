@@ -70,8 +70,6 @@ system("git pull")
 ``` 
 
 
-If you get errors refer to the instructions for handling errors in Lab 3. (I will not repeat them here as some people were running them when they had no errors.)
-
 Now, let's create a new R script file for this lab. You can do this by going to File > New File > R Script. Save the new file in your My_Labs folder with the name lab_8.R. (If you named your folder something different, just save it there.)
 
 # Part 1: One-sample Z-Test

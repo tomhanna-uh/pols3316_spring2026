@@ -1,0 +1,343 @@
+---
+title: "Lab 5: T-Tests and Plotting 2 or more variables"
+author:
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation:
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright:
+  holder: Tom Hanna
+  year: 2026
+date: today
+format:
+  docx:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    highlight-style: github
+    page-width: 6.5
+from: markdown-smart
+execute:
+  echo: true
+  eval: false
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    tidy: true
+    tidy.opts:
+      width.cutoff: 70
+---
+
+## Getting ready
+
+### Proper project
+
+Be sure you are in the project for the class github repository. You can check this by looking at the top of the RStudio window, it should show the name of the project as `"pols3316_spring2026"`. If not, you can open the project by going to `File > Open Project` and selecting the `pols3316_spring2026.Rproj` file in the folder where you cloned the repository or by going to `File > Recent Projects` and selecting it from the list.
+
+### Clear the console and environment
+
+Next, we are going to clear the console and remove all objects from the environment.
+
+To clear the console, you can use the shortcut `Ctrl + L` (Windows/Linux) or `Cmd + L` (Mac).
+
+To clear the environment, you can use the broom icon in the upper right or use following command in R by typing it in the console:
+
+```r
+# this command erases all objects from the environment
+
+rm(list = ls())
+
+```
+
+## Git Pull
+
+Last, we are going to do a "Git Pull" to update the local repository with the latest material from the class github repository on GitHub.
+
+You can do this by going to the "Git" tab in the upper right pane of RStudio and clicking the "Pull" button or by using the following command in R by typing it in the console:
+
+```
+# this executes a git pull
+
+system("git pull")
+``` 
+
+
+Now, let's create a new R script file for this lab. You can do this by going to File > New File > R Script. Save the new file in your My_Labs folder with the name lab_8.R. (If you named your folder something different, just save it there.)
+
+
+## One-sample t-test
+
+Use when you want to compare the mean of a single sample to a known value (e.g., zero or a population mean).
+
+Toy data: 10 reaction‑time measurements (in milliseconds) from a cognitive task.
+Null hypothesis: The true mean reaction time is 250 ms.
+
+```
+# Toy data for one-sample t-test
+reaction_times <- c(248, 252, 245, 260, 247, 255, 250, 243, 258, 249)
+
+# Perform one-sample t-test comparing to mu = 250
+t.test(reaction_times, mu = 250)
+```
+
+Interpretation: The output gives the t‑statistic, degrees of freedom, p‑value, and confidence interval. If p < 0.05, you reject the null and conclude the sample mean differs from 250 ms.
+Assumptions: No major outliers; data approximately normal.
+
+
+## Paired (dependent‑samples) t‑test
+
+Use when you have two measurements on the same subjects (e.g., before/after, pre/post) and want to test if the mean difference is zero.
+
+Toy data: Systolic blood pressure (mmHg) for 8 patients before and after a new medication.
+
+
+```
+# Toy data for paired t-test
+before <- c(142, 138, 145, 140, 136, 144, 141, 139)
+after  <- c(130, 128, 132, 129, 126, 131, 129, 127)
+
+# Perform paired t-test
+t.test(before, after, paired = TRUE)
+```
+
+Interpretation: The output gives the t‑statistic, degrees of freedom, p‑value, and confidence interval for the mean difference. If p < 0 , u reject the null and conclude the medication had an effect on blood pressure.
+
+## Independent‑samples (unpaired) t‑test
+
+
+Use when you have two separate groups and want to test if their means differ.
+
+Toy data: Scores on a statistics quiz for two independent study groups (Group A used traditional lectures; Group B used interactive tutorials).
+
+```
+# Toy data for independent-samples t-test
+group_A <- c(72, 78, 69, 74, 71, 75, 70, 73)   # Traditional lecture
+group_B <- c(85, 88, 82, 86, 84, 89, 83, 87)   # Interactive tutorial
+
+# Welch's t-test (default; does not assume equal variances)
+t.test(group_A, group_B)
+
+# Student's t-test (assumes equal variances)
+t.test(group_A, group_B, var.equal = TRUE)
+```
+
+Note: var.equal = TRUE is the student's t-test. var.equal = FALSE runs Welch's t-test, which is more robust when variances are unequal.
+
+Interpretation: A significant p‑value suggests the tutorial group scored higher.
+
+Assumptions: Independence between groups; each group approximately normal; similar variances (for Student’s test).
+
+
+
+## Practice Plotting Multi-variate Data
+
+First, let's load the small V-Dem data set from the data/ directory (folder).
+
+```
+# load vdem subset
+
+vdem <- read.csv("data/vdemdata.csv")
+```
+
+Now, let's create a scatter plot of the relationship between GDP per capita and the polyarchy index with a fitted linear regression line.
+
+```
+# scatterplot of GDP per capita vs polyarchy with lm line
+
+library(ggplot2)
+ggplot(vdem, aes(x = gdp_per_capita, y = polyarchy)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatterplot of GDP per Capita vs Polyarchy",
+       x = "GDP per Capita",
+       y = "Polyarchy Index")
+       
+```
+
+ggplot() is the main function to create a plot. aes() specifies the aesthetics, where x is GDP per capita and y is the polyarchy index. geom_point() adds points to the plot, and geom_smooth(method = "lm") adds a linear regression line. labs() sets the title and axis labels.
+
+
+You may have noticed that this relationship isn't really linear. We have a number of options. One is to log-transform the GDP per capita variable to see if that helps. Let's try that.
+
+```
+# scatterplot of log GDP per capita vs polyarchy with lm line
+ggplot(vdem, aes(x = log(gdp_per_capita), y = polyarchy)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatterplot of Log GDP per Capita vs Polyarchy",
+       x = "Log GDP per Capita",
+       y = "Polyarchy Index")
+
+```
+
+Now, we are going to look at another common transformation, the Quadratic and we will create some toy data to work with.
+
+```
+# create toy data for quadratic relationship
+set.seed(123)
+x <- seq(-10, 10, length.out = 100)
+y <- 0.5 * x^2 + rnorm(100, mean = 0, sd = 5)
+quadratic_data <- data.frame(x, y)
+
+# scatterplot of toy data with lm line
+ggplot(quadratic_data, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatterplot of Toy Data with Linear Fit",
+       x = "X",
+       y = "Y")
+       
+```
+
+Clearly the regular lm() line does not fit. The correlation is probably 0 or very close, but there is a clear relationship. Let's try adding a quadratic term to the model.
+
+```
+# scatterplot of toy data with quadratic lm line
+ggplot(quadratic_data, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE) +
+  labs(title = "Scatterplot of Toy Data with Quadratic Fit",
+       x = "X",         
+       y = "Y") 
+       
+```
+The quadratic term is just the + X^2 part of the formula, which we represent with I(x^2) to tell R to treat it as a mathematical operation rather than a new variable.
+
+You can also do this with a negative quadratic if the curve goes the other direction.
+
+```
+# create toy data for negative quadratic relationship
+set.seed(123)
+x <- seq(-10, 10, length.out = 100)
+y <- -0.5 * x^2 + rnorm(100, mean = 0, sd = 5)  
+negative_quadratic_data <- data.frame(x, y)
+
+# scatterplot of toy data with negative quadratic lm line
+ggplot(negative_quadratic_data, aes(x = x, y = y)) + 
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE) +
+  labs(title = "Scatterplot of Toy Data with Negative Quadratic Fit",
+       x = "X",
+       y = "Y")
+       
+```
+
+
+Transformations can help a lot if the pattern is clear. Another option is a different sort of smoothing called GAM. Let's try that with two different variables, GDP per capita and egalitarian democracy.
+
+```
+# scatterplot of log GDP per capita vs egalitarian_democracy with GAM line
+       
+ggplot(vdem, aes(x = log(gdp_per_capita), y = egalitarian_democracy)) +
+  geom_point() +
+  geom_smooth(method = "gam", se = FALSE) +
+  labs(title = "Scatterplot of Log GDP per Capita vs Egalitarian Democracy",
+       x = "Log GDP per Capita",
+       y = "Egalitarian Democracy Index")
+       
+
+
+```
+
+The curve reflects egalitarian democracy rising as GDP rises, but reaching a peak and then tapering off slightly. Some of this is due to the overall data trend, but it is also influenced by that one very high GDP outlier. 
+
+The GAM line is more flexible than the linear regression line and can capture non-linear relationships. In this case, it seems to fit the data better than the linear regression line. Technically, GAM plots a series of linear regressions across the range of the data, which allows it to capture more complex relationships between the variables. GAM stands for Generalized Additive Model, and it is a more advanced machine learning model. The geom_smooth(method = "gam") function in ggplot2 fits a GAM to the data and adds the fitted line to the plot.
+
+## Adding a third variable
+
+Some of you may have a categorical third value that is a "dummy" variable, meaning it is coded as 0 or 1 to indicate the presence or absence of a certain condition. For example, you might have a variable called "democracy" that is coded as 1 for democratic countries and 0 for non-democratic countries. How could you plot this?
+
+Let's use some toy data for a simple example.
+
+```
+set.seed(123)
+x <- seq(1, 100, length.out = 100)
+y <- 0.5 * x + rnorm(100, mean = 0, sd = 5)
+democracy <- ifelse(x > 50, 1, 0 )  # Dummy variable: 1 for x > 50, 0 otherwise
+
+data_with_dummy <- data.frame(x, y, democracy)
+
+# we can plot the dummy as different colors
+
+ggplot(data_with_dummy, aes(x = x, y = y, color = factor(democracy))) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatterplot with Dummy Variable",
+       x = "X",
+       y = "Y",
+       color = "Democracy (0 or 1)") +
+  theme(legend.position = "bottom")
+  
+
+```
+
+Many of you will have an additional numerical variable you want to use as a control variable. For example, you might have a variable called "population" that you want to use as a control variable in your analysis. You can use the size aesthetic in ggplot2 to represent this variable. We will do this with the v-dem data.
+
+```
+ggplot(vdem, aes(x = log(gdp_per_capita), y = polyarchy, size = population)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatterplot of Log GDP per Capita vs Polyarchy with Population Size",
+       x = "Log GDP per Capita",
+       y = "Polyarchy Index",
+       size = "Population") +
+  theme(legend.position = "bottom")
+
+
+
+
+```
+
+The size of the population is represented by the size of point in the scatterplot. 
+
+
+## Assignment
+
+Pick two variables from the data you are using for your project and produce a scatter plot with a fitted lm() line to visualize the relationship between those two variables. Be sure to label your axes and give your plot a title.
+
+1. Describe what you see. Is there a good linear relationship or does the line seem to not fit the data well?
+
+2. If the line doesn't fit the data well, try either a transformation or a GAM line. Describe how the transformation or GAM line fits the data compared to the linear regression line.
+
+3. Do you have a third variable you want to use as a control? If so, create an appropriate plot. 
+
+Put your answers and your plots in a Word document or PDF and upload that to the assignment in Canvas. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Authorship, License, Credits
+
+
+- Author: Tom Hanna
+
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
+
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](creative_commons_license.png)</a>
+
+
