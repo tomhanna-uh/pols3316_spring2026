@@ -1,0 +1,284 @@
+---
+title: "Lecture 9: Regression Example"
+author: 
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation: 
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright: 
+  holder: Tom Hanna
+  year: 2026
+date: today
+format: 
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                theme: ../assets/custom.scss
+                slide-number: true
+                preview-links: true 
+                logo: ../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+        docx:
+                toc: true
+                number-sections: true
+                reference-doc: ../../lab-template.docx
+        html:
+                theme: cosmo
+                style: custom.css
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        pdf: 
+                toc: true
+                toc-depth: 2
+                toc-location: left
+                number-sections: true
+                fig_caption: true
+---
+
+
+## Formulas
+
+## Simple Linear Regression from Covariance
+
+The slope ($\hat{\beta}_1$) of the regression line can be computed directly from covariance and variance:
+
+$$
+\hat{\beta}_1 = \frac{\text{Cov}(X, Y)}{\text{Var}(X)} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+
+
+
+
+## Finding the Intercept in Simple Linear Regression
+
+Once you have the slope $\hat{\beta}_1$, the intercept is calculated as:
+
+$$
+\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
+$$
+
+## Why this formula works
+- The regression line **must pass through the point** $(\bar{x}, \bar{y})$, the means of $X$ and $Y$.
+- Substituting $x = \bar{x}$ into the regression equation $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$ gives $\hat{y} = \bar{y}$.
+- Solving for $\hat{\beta}_0$ yields the formula above.
+
+
+
+
+## Full Equation
+
+The full regression equation is then slope:
+
+$$
+\hat{\beta}_1 = \frac{\text{Cov}(X, Y)}{\text{Var}(X)}
+$$
+
+with intercept:
+
+$$
+\hat{\beta}_1 = \frac{\text{Cov}(X, Y)}{\text{Var}(X)} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+
+
+## Four-point dataset
+
+Use these four observations:
+
+| x | y |
+|---:|---:|
+| 1 | 2 |
+| 2 | 3 |
+| 3 | 5 |
+| 4 | 4 |
+
+## Computing the regresion line
+
+
+\[
+\hat{y} = a + bx
+\]
+
+with
+
+\[
+b = \frac{\operatorname{Cov}(x,y)}{\operatorname{Var}(x)}
+\qquad
+\text{and}
+\qquad
+a = \bar{y} - b\bar{x}
+\]
+
+## Step 1: Compute the means
+
+\[
+\bar{x} = \frac{1+2+3+4}{4} = \frac{10}{4} = 2.5
+\]
+
+\[
+\bar{y} = \frac{2+3+5+4}{4} = \frac{14}{4} = 3.5
+\]
+
+## Step 2: Compute deviations
+
+| x | y | \(x-\bar{x}\) | \(y-\bar{y}\) |
+|---:|---:|---:|---:|
+| 1 | 2 | -1.5 | -1.5 |
+| 2 | 3 | -0.5 | -0.5 |
+| 3 | 5 | 0.5 | 1.5 |
+| 4 | 4 | 1.5 | 0.5 |
+
+## Step 3: Cross-products and squared deviations
+
+| x | y | \(x-\bar{x}\) | \(y-\bar{y}\) | \((x-\bar{x})(y-\bar{y})\) | \((x-\bar{x})^2\) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 2 | -1.5 | -1.5 | 2.25 | 2.25 |
+| 2 | 3 | -0.5 | -0.5 | 0.25 | 0.25 |
+| 3 | 5 | 0.5 | 1.5 | 0.75 | 0.25 |
+| 4 | 4 | 1.5 | 0.5 | 0.75 | 2.25 |
+| **Sum** |  |  |  | **4.00** | **5.00** |
+
+## Step 4: Compute covariance and variance
+
+Because there are \(n=4\) observations,
+
+\[
+\operatorname{Cov}(x,y) = \frac{4.00}{4-1} = \frac{4}{3}
+\]
+
+\[
+\operatorname{Var}(x) = \frac{5.00}{4-1} = \frac{5}{3}
+\]
+
+## Step 5: Compute the slope
+
+\[
+b = \frac{\operatorname{Cov}(x,y)}{\operatorname{Var}(x)}
+= \frac{4/3}{5/3}
+= \frac{4}{5}
+= 0.8
+\]
+
+## Step 6: Compute the intercept
+
+\[
+a = \bar{y} - b\bar{x}
+\]
+
+\[
+a = 3.5 - (0.8)(2.5)
+= 3.5 - 2.0
+= 1.5
+\]
+
+## Regression line
+
+So the regression line is
+
+\[
+\hat{y} = 1.5 + 0.8x
+\]
+
+## Step 7: Check fitted values
+
+| x | y | \(\hat{y} = 1.5 + 0.8x\) |
+|---:|---:|---:|
+| 1 | 2 | 2.3 |
+| 2 | 3 | 3.1 |
+| 3 | 5 | 3.9 |
+| 4 | 4 | 4.7 |
+
+## Board version
+
+1. Write the four data points.
+2. Compute \(\bar{x}=2.5\) and \(\bar{y}=3.5\).
+3. Compute deviations.
+4. Sum the cross-products and squared deviations.
+5. Compute \(\operatorname{Cov}(x,y)=4/3\) and \(\operatorname{Var}(x)=5/3\).
+6. Compute \(b=0.8\) and \(a=1.5\).
+7. Write the line: \(\hat{y}=1.5+0.8x\).
+
+
+## Example with 4 observations
+
+```{r}
+# 4-observation dataset
+x <- c(1, 2, 3, 4)
+y <- c(2, 3, 5, 4)
+
+# Step 1: means
+x_bar <- mean(x)
+y_bar <- mean(y)
+
+x_bar
+y_bar
+```
+
+```{r}
+# Step 2: deviations from the means
+dx <- x - x_bar
+dy <- y - y_bar
+
+cbind(x, y, dx, dy)
+```
+
+```{r}
+# Step 3: covariance and variance
+n <- length(x)
+
+cov_xy <- sum(dx * dy) / (n - 1)
+var_x  <- sum(dx^2) / (n - 1)
+
+cov_xy
+var_x
+```
+
+```{r}
+# Step 4: slope and intercept from covariance and variance
+beta_1 <- cov_xy / var_x
+beta_0 <- y_bar - beta_1 * x_bar
+
+beta_0
+beta_1
+```
+
+```{r}
+# Step 5: regression line
+# Fitted values for each x
+y_hat <- beta_0 + beta_1 * x
+
+cbind(x, y, y_hat)
+```
+
+```{r}
+# Optional check using lm()
+summary(lm(y ~ x))
+```
+
+
+
+
+## Authorship, License, Credits
+
+
+
+- Author: Tom Hanna
+
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
+
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](creative_commons_license.png)</a>
+
