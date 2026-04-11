@@ -42,5 +42,8 @@
   },
   "Lectures/Lecture_9_Regression_Example/regression_example.qmd": {
     "regression_example.html": "5c14700c"
+  },
+  "sample_code/ols-transformations-cheatsheet.qmd": {
+    "ols-transformations-cheatsheet.html": "5b6adf05"
   }
 }
