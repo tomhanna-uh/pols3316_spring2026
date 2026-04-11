@@ -198,7 +198,7 @@ logy_raw + logy_fix + plot_annotation(title = "Exponential growth with log(y)")
 
 ## Multiplicative relationship: log-log
 
-```{r fig.width=11, fig.height=4.8}
+```{r, eval=TRUE, fig.width=11, fig.height=4.8}
 #| echo=FALSE
 
 n <- 140

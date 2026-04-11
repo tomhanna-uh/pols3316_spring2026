@@ -44,6 +44,7 @@
     "regression_example.html": "5c14700c"
   },
   "sample_code/ols-transformations-cheatsheet.qmd": {
-    "ols-transformations-cheatsheet.html": "5b6adf05"
+    "ols-transformations-cheatsheet.html": "5b6adf05",
+    "ols-transformations-cheatsheet.tex": "51f3b362"
   }
 }
