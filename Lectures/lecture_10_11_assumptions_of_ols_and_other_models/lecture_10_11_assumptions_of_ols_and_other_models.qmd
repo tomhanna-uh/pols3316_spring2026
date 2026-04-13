@@ -1,0 +1,739 @@
+---
+title: "Lecture 10-11: OLS Assumptions, Logistic Regression, and Beyond"
+author: 
+  - name: Tom Hanna
+    id: th
+    orcid: 0000-0002-8054-0335
+    email: tlhanna@central.uh.edu
+    url: tomhanna.me
+    affiliation: 
+      - name: University of Houston
+        city: Houston
+        state: TX
+        url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright: 
+  holder: Tom Hanna
+  year: 2026
+date: today
+format: 
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                theme: ../assets/custom.scss
+                slide-number: true
+                preview-links: true 
+                logo: ../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+        docx:
+                toc: true
+                number-sections: true
+                reference-doc: ../../lab-template.docx
+        html:
+                theme: cosmo
+                style: custom.css
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        pdf: 
+                toc: true
+                toc-depth: 2
+                toc-location: left
+                number-sections: true
+                fig_caption: true
+---
+
+# Agenda and announcements
+
+## Today
+
+- OLS: what assumptions it makes
+- What the assumptions mean in plain language
+- What to do when assumptions are violated
+- Logistic regression as the main alternative for binary outcomes
+- How maximum likelihood differs from OLS
+- Very brief tour of other generalized models
+
+## Where we are in the course
+
+- We have already covered variables, distributions, the CLT, covariance, correlation, hypothesis testing, and chi-square
+- In Lecture 9, we built a regression line and used residuals to see how OLS chooses the line
+- Today we move from "how to draw the line" to "when should we trust the line?"
+
+# From the line to the model
+
+## Reminder: What OLS is doing
+
+- Ordinary Least Squares chooses the line that minimizes the sum of squared residuals
+- Residual = observed value minus predicted value
+- OLS gives us a simple closed-form solution for the line in the bivariate case
+- That is why we could calculate the slope and intercept directly last class
+- The line minimizes the sum of the squared vertical distances from the points to the line
+
+
+
+
+
+## Why assumptions matter
+
+- OLS always gives you a line
+- The real question is whether that line gives trustworthy estimates, standard errors, and hypothesis tests
+- Statistical models are useful approximations
+- So we need assumptions that are close enough to reality to make the model useful
+
+# Big picture assumptions
+
+## The two levels of assumptions
+
+- Some assumptions are about the data-generating process
+- Some assumptions are about the error term
+- Some assumptions mainly affect unbiasedness
+- Others mainly affect standard errors, confidence intervals, and p-values
+
+## A plain-language summary
+
+- OLS works best when the relationship is approximately linear
+- Cases should be independent
+- The error term should not systematically change with X
+- Residuals should not show strong patterns the model failed to capture
+- Severe violations are a problem; tiny ones often are not
+
+# Assumption 1: linearity
+
+## What linearity means
+
+- The expected value of Y changes in a straight-line way as X changes
+- This does **not** mean every point lies on a line
+- It means the average relationship is linear
+- Residuals can still exist; they just should not have a curved pattern
+
+## Visually
+
+- This is what we covered in the last lab
+
+## How to diagnose nonlinearity
+
+- Scatterplot of Y against X
+- Residual plot: residuals should look patternless
+- If residuals make a U-shape or inverted U-shape, the model is missing curvature
+
+##
+
+![Residual plot showing a U-shaped pattern, indicating nonlinearity](residual_plot_nonlinearity.jpg){fig-alt="Residual plot showing a U-shaped pattern, indicating nonlinearity"}
+
+## What to do about it
+
+- Add a nonlinear term like \(X^2\)
+- Transform a variable when substantively sensible
+- Use interaction terms if the slope differs across groups
+- Sometimes a small amount of curvature is acceptable if the line is still a good approximation over the observed range
+
+## When small violations can be ignored
+
+- If the residual plot shows only mild curvature
+- If substantive conclusions do not change with a slightly more flexible specification
+- If the model is used mainly for simple description over a narrow range of X
+
+# Assumption 2: independence
+
+## What independence means
+
+- Observations should not contain duplicated information from one another
+- One case should not make another case's error predictable
+- This is closely related to earlier course discussion of IID assumptions
+
+## Examples of non-independence
+
+- Repeated observations on the same country or person
+- Students clustered within the same classroom
+- Survey respondents from the same household
+- Time series where today's value depends on yesterday's shocks
+
+## Non-independence - Autocorrelation
+
+![Residual plot showing a clear pattern over time, indicating autocorrelation](non-independence.png){fig-alt="Residual plot showing a clear pattern over time, indicating autocorrelation"}
+
+## Why it matters
+
+- Non-independence often leaves coefficients similar
+- But standard errors are often too small
+- That makes p-values look more impressive than they should
+
+## What to do about it
+
+- Clustered standard errors
+- Fixed effects or multilevel models
+- Time-series corrections when data are ordered over time
+- If dependence is weak and sample structure is simple, robust corrections are often enough for an introductory treatment
+
+## When small violations can be ignored
+
+- Mild dependence is less troubling when the substantive result is large and stable
+- It is more troubling when the claim depends on a borderline p-value
+- In practice, this is often a "be cautious" issue rather than an automatic failure
+
+# Assumption 3: zero conditional mean
+
+## The core idea
+
+- The error term should have mean zero at every value of X
+- In plain English: after accounting for X, the leftover part should be random rather than systematically related to X
+
+## Why this is so important
+
+- This is the key exogeneity idea
+- If omitted causes of Y are correlated with X, OLS coefficients become biased
+- This is the assumption most tied to causal interpretation
+
+## Intuition
+
+- Suppose education predicts income
+- But ability is omitted and correlated with education
+- Then the education coefficient partly captures ability too
+- The line is attributing too much to X
+
+## What to do about it
+
+- Add omitted variables when possible
+- Improve research design
+- Use fixed effects, experiments, or instruments in more advanced settings
+- Be modest about causal claims when omitted variable bias is plausible
+
+## Can we safely ignore small violations?
+
+- Sometimes for prediction, yes
+- For causal inference, much less so
+- This is one of the violations students should worry about most
+
+# Assumption 4: homoskedasticity
+
+## What homoskedasticity means
+
+- The spread of the residuals is roughly constant across values of X
+- In plain language: the model should be about equally wrong across the range of X
+
+## Visual intuition
+
+![Residual plot showing a fanning pattern, indicating heteroskedasticity](homoskedasticity.png){fig-alt="Residual plot showing a fanning pattern, indicating heteroskedasticity"}
+
+## Why it matters
+
+- OLS coefficients are still unbiased under many cases of heteroskedasticity
+- But the usual standard errors are wrong
+- So confidence intervals and significance tests become unreliable
+
+## What to do about it
+
+- Use heteroskedasticity-robust standard errors
+- Reconsider model specification
+- Transform Y when appropriate
+- If variance changes only a little, robust standard errors are usually an easy fix
+
+## When small violations can be ignored
+
+- If the residual plot shows only mild fanning
+- If robust and conventional standard errors tell the same story
+- In practice, many analysts simply default to robust standard errors
+
+# Assumption 5: normality of residuals
+
+## What normality does and does not mean
+
+- OLS does **not** require Y itself to be normal
+- The concern is the distribution of residuals, especially in small samples
+- Normality mainly supports exact small-sample inference
+
+## Visually it means
+
+![Normality of residuals around the OLS regression line demonstrated with normal curves at several points](normality.jpg){fig-alt="Normality of residuals around the OLS regression line demonstrated with normal curves at several points"}
+
+
+
+## Why this should sound familiar
+
+- Earlier in the course, we linked inference to probability distributions and the CLT
+- With larger samples, the CLT often makes inference approximately work even when residuals are not perfectly normal
+
+## How to diagnose it
+
+- Histogram of residuals
+- Q-Q plot
+- Look for extreme skew or huge outliers, not tiny imperfections
+
+## Q-Q plot
+
+```{r}
+#| echo: false
+#| eval: true
+#| fig-width: 8
+#| fig-height: 6
+#| fig-align: center
+#| fig-cap: "Q-Q Plot of Residuals – Clear Non-Normality (Heavy Tails)"
+
+set.seed(123)  # for reproducibility
+
+# Simulate data with non-normal (heavy-tailed) residuals
+n <- 200
+x <- rnorm(n, mean = 50, sd = 15)
+# True model: y = 10 + 2*x + heavy-tailed error (t-distribution with df=3)
+error <- rt(n, df = 3) * 8          # scaled t(3) errors → strong non-normality
+y <- 10 + 2 * x + error
+
+# Fit the OLS model
+model <- lm(y ~ x)
+
+# QQ plot of standardized residuals (base R – clean and reliable)
+qqnorm(rstandard(model),
+       main = "Normal Q-Q Plot of Standardized Residuals",
+       xlab = "Theoretical Quantiles",
+       ylab = "Standardized Residuals",
+       pch = 19, col = "#1f77b4")
+qqline(rstandard(model), col = "red", lwd = 2)
+
+# Optional: add a subtitle to emphasize non-normality
+
+mtext("Code will be provided in Labs Module - this would add a lot of professionalism to your final projects", side = 3, line = 0.5, cex = 0.9, col = "darkred")
+
+```
+
+
+
+## What to do about violations
+
+- Check for outliers or coding errors
+- Transform variables if substantively justified
+- In larger samples, mild non-normality is often not a major problem
+- Focus more on severe skew, extreme outliers, or misspecification
+
+## When small violations can be ignored
+
+- Often, especially with moderate or large \(n\)
+- This is one of the assumptions students tend to worry about too much
+- In many real applications, non-normal residuals are less serious than omitted variables or dependence
+
+# Assumption 6: no perfect multicollinearity
+
+## What it means
+
+- Predictors cannot be exact linear combinations of one another
+- The model needs unique information from each predictor
+
+## Example
+
+- If you include both "age" and "years since birth"
+- Or all categories of a dummy variable plus the intercept
+- The software cannot separate their effects
+
+## Visual Example of Multicollinearity
+
+![Perfect multicollinearity example: two good predictors compared to two highly correlated](multicollinearity.png){fig-alt="Perfect multicollinearity example: two predictors perfectly correlated"}
+
+
+## Why it matters
+
+- Perfect multicollinearity means the model cannot be estimated as written
+- Near multicollinearity means the model can be estimated, but coefficients become unstable and standard errors inflate
+
+
+## What to do about it
+
+- Drop one redundant variable
+- Choose a reference category for dummies
+- Combine highly overlapping measures if that makes substantive sense
+
+## When small violations can be ignored
+
+- Mild collinearity is common
+- It mainly reduces precision rather than creating bias by itself
+- If theory demands both variables, you may keep them and interpret cautiously
+
+# Assumption 7: correct outcome type
+
+## A practical assumption students forget
+
+- OLS assumes a continuous outcome with an unbounded linear prediction
+- But not all dependent variables work like that
+
+## Examples of non-continuous outcomes
+
+![Examples of continuous vs binary and count](ols_assumption_7_1.png){fig-alt="Examples of different outcome types: binary, count"}
+
+
+
+
+
+## Why this matters
+
+- A binary outcome only takes values 0 and 1
+- Counts cannot go below 0
+- Ordinal categories are ranked but not equally spaced
+- Using OLS on these can produce impossible predictions or the wrong error structure
+
+## Transition to the next topic
+
+- This is why we need models other than OLS
+- The model should match the data-generating process
+- That connects directly to logistic regression and maximum likelihood
+
+## From OLS to MLE
+
+![OLS line through binary data showing impossible predictions, contrasted with logistic S-curve](ols_to_MLE.png){fig-alt="OLS line through binary data showing impossible predictions, contrasted with logistic S-curve"}
+
+# Which assumptions matter most?
+
+## A rough ranking for students
+
+- Most serious for causal inference: omitted variables / exogeneity
+- Often important for inference: dependence and heteroskedasticity
+- Important for fit: nonlinearity
+- Often less serious in larger samples: mild non-normality
+- Mechanical issue: multicollinearity
+
+## A useful checklist
+
+- Ask first: Is the model form wrong?
+- Ask second: Are my standard errors trustworthy?
+- Ask third: Is the outcome type appropriate for OLS?
+
+# Moving from OLS to MLE
+
+## Why leave OLS?
+
+- OLS works very well for continuous outcomes under the right conditions
+- But many political science outcomes are binary, ordinal, counts, or categories
+- We need a more general estimation framework
+
+## The big idea of maximum likelihood
+
+- Maximum Likelihood Estimation asks:
+- "Given this model, which parameter values make the observed data most likely?"
+- Instead of minimizing squared residuals, we maximize a likelihood function
+
+## Contrast in one sentence
+
+- OLS: choose coefficients that minimize squared residuals
+- MLE: choose coefficients that maximize the probability of the data under the model
+
+# Logistic regression
+
+## When we use it
+
+- Logistic regression is for a binary dependent variable
+- Examples: voted or not, war or peace, passed or failed, democracy or autocracy transition
+- The outcome is modeled as a probability between 0 and 1
+
+## Why not use OLS for a binary outcome?
+
+- OLS can predict values below 0 or above 1
+- The error variance changes mechanically with the predicted probability
+- The relationship between X and probability is usually nonlinear
+
+## Video 1
+
+
+
+(Open ols_binary_fails.mp4)
+
+## Commentary
+
+OLS gives us probabilities larger than 100% and less than 0%, greater than 1 and less than 0. That's just not possible. Logistic regression respects the bounds of probability, so it gives us a curve that stays between 0 and 1.
+
+## Video 2
+
+(Open Logit Saves the Day video logistic_regression_saves_the_day.mp4)
+
+
+
+# "Linear on the inside, curved on the outside"
+
+## The linear part of logistic regression
+
+- Logistic regression is linear in the log-odds
+- The model is:
+- \[
+\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1 X
+\]
+
+## The curved part
+
+- When we convert log-odds back into probability, the relationship becomes S-shaped
+- That is why the graph of probability against X is not a straight line
+- A one-unit change in X has a constant effect on log-odds, not on probability
+
+
+# Probability, odds, and log-odds
+
+## Probability
+
+- Probability is the chance of an event, from 0 to 1
+- Example: \(p = 0.75\) means a 75% chance
+
+## Odds
+
+- Odds compare the chance of success to the chance of failure
+- \[
+\text{odds} = \frac{p}{1-p}
+\]
+- If \(p = 0.75\), odds = \(0.75/0.25 = 3\), or 3-to-1
+
+## Log-odds
+
+- Logistic regression takes the natural log of the odds
+- \[
+\log\left(\frac{p}{1-p}\right)
+\]
+- This converts the bounded probability scale into an unbounded linear scale
+
+## Why do this?
+
+- Probabilities are bounded between 0 and 1
+- Log-odds run from negative infinity to positive infinity
+- That makes a linear model possible
+
+# The link function
+
+## What is a link function?
+
+- The link function connects the linear predictor to the mean of the outcome
+- In logistic regression, the link is the logit link
+- It maps probability to log-odds
+
+## Simple explanation
+
+- OLS identity link: predicted Y is directly the linear predictor
+- Logistic regression logit link: predicted probability is connected indirectly through log-odds
+- Same basic idea of predictors and coefficients, different mapping to the outcome scale
+
+## Nice comparison table
+
+| Model | Outcome type | Linear part | Output scale |
+|---|---|---|---|
+| OLS | Continuous | \( \beta_0 + \beta_1 X \) | Y |
+| Logit | Binary | \( \beta_0 + \beta_1 X \) | log-odds, then probability |
+
+# How estimation differs
+
+## OLS has a direct formula
+
+- In simple regression, we can solve for slope and intercept directly
+- That is what you did in Lecture 9 with covariance and variance
+
+## Logistic regression does not
+
+- There is no simple closed-form equation that directly solves the coefficients
+- The computer starts with guesses
+- Then it repeatedly updates them to improve the likelihood
+- This is iterative optimization
+
+## Plain-language analogy
+
+- OLS is like having an answer key formula
+- Logistic regression is like searching uphill until you reach the highest point on the likelihood surface
+
+# What logistic coefficients mean
+
+## Interpreting a coefficient
+
+- In logit, a one-unit increase in X changes the **log-odds** by \(\beta_1\)
+- Exponentiating gives an **odds ratio**
+- Odds ratios above 1 increase the odds; below 1 decrease the odds
+
+## Why students find this awkward
+
+- Log-odds are not intuitive
+- Odds are more intuitive, but still not as intuitive as probability
+- That is why predicted probabilities and marginal effects are often easier to present
+
+## Teaching advice slide
+
+- Know the coefficient is about log-odds
+- Know \(e^{\beta}\) gives the odds ratio
+- For interpretation, plots of predicted probabilities are often best
+
+# OLS versus logit
+
+## Similarities
+
+- Both use predictors to explain variation in an outcome
+- Both estimate coefficients
+- Both can include multiple X variables, interactions, and nonlinear terms
+- Both can be used for explanation or prediction
+
+## Differences
+
+| Feature | OLS | Logistic regression |
+|---|---|---|
+| Dependent variable | Continuous | Binary |
+| Estimation | Least squares | Maximum likelihood |
+| Functional form | Straight line in Y | Straight line in log-odds |
+| Predicted values | Unbounded | Between 0 and 1 |
+| Typical interpretation | Unit change in Y | Change in log-odds / odds / probability |
+
+# Assumptions of logistic regression
+
+## Core assumptions
+
+- Binary dependent variable
+- Independent observations
+- Correct functional form in the logit
+- No perfect multicollinearity
+- Sufficient data, especially enough 0s and 1s
+- No extreme separation problems
+
+## What is different from OLS?
+
+- Logistic regression does **not** assume homoskedastic residuals in the OLS sense
+- It does **not** assume normally distributed residuals
+- But it still cares about independence, specification, and omitted variables
+
+## Small violations
+
+- Mild nonlinearity in the logit can often be handled with transformations or splines
+- Sparse data are more dangerous than small cosmetic departures
+- Separation is a bigger practical problem than normality
+
+# What is separation?
+
+## Separation in plain English
+
+- If X almost perfectly predicts whether Y is 0 or 1, the model can struggle
+- The likelihood keeps improving as a coefficient gets bigger and bigger
+- Estimates can become unstable or fail
+
+## Example
+
+- If every incumbent wins and every challenger loses in your tiny sample
+- Then the model may have trouble estimating a finite slope
+
+## What to do
+
+- Get more data
+- Simplify the model
+- Collapse sparse categories
+- Use penalized methods in advanced work
+
+
+
+
+# Beyond binary outcomes
+
+## The broader idea
+
+- Different kinds of dependent variables need different models
+- The general rule is:
+- match the model to the outcome type and data-generating process
+
+## Ordered logit
+
+- If the outcome is ordinal, with ranked categories
+- Example: strongly disagree to strongly agree
+- Ordered logit uses the ranking information without pretending the distances are equal
+
+## Poisson regression
+
+- If the outcome is a count
+- Example: number of protests, vetoes, coups, or conflict events
+- Poisson is built for nonnegative integer counts
+
+## Probit
+
+- Also for binary outcomes
+- Very similar to logit in practice
+- Main difference is the link function: normal CDF instead of logistic curve
+
+## Nominal regression
+
+- If categories have no natural order
+- Example: party choice among Democrat, Republican, Independent
+- Multinomial or nominal logistic regression is the common approach
+
+# A simple decision slide
+
+## What model should I think about first?
+
+- Continuous Y -> OLS
+- Binary Y -> Logit or probit
+- Ordinal Y -> Ordered logit
+- Count Y -> Poisson
+- Unordered categories -> Multinomial / nominal logit
+
+# Graphical demonstration idea
+
+## One-slide visual taxonomy
+
+- Continuous outcome: straight number line and OLS line
+- Binary outcome: two values, 0 and 1, with S-curve
+- Ordinal outcome: stacked ranked boxes
+- Count outcome: 0, 1, 2, 3, ...
+- Nominal outcome: colored categories with no ranking
+
+## Major points
+
+- The dependent variable tells you a lot about the model choice
+- The wrong model can answer the wrong question even if the software gives output
+
+# Bringing it together
+
+## Big takeaways
+
+- OLS is powerful, simple, and interpretable, but it depends on assumptions
+- Some violations mainly hurt standard errors; others create bias
+- Logistic regression is the main entry point to maximum likelihood
+- In logit, the model is linear in log-odds, not in probability
+- Different outcome types call for different models
+
+## Suggested final class question
+
+- If your dependent variable is whether a country experiences civil conflict onset this year, would you start with OLS or logit?
+- Why?
+- What assumptions would you worry about most?
+
+
+
+
+# Coefficient interpretation
+
+## Original units
+
+- **OLS:** 1-unit increase in $X$ -> $\beta$-unit change in $Y$
+- **Logit:** 1-unit increase in $X$ -> $\beta$ change in log-odds; $e^\beta$ = odds ratio
+- **Probit:** 1-unit increase in $X$ -> $\beta$ change in latent z-index
+- **Ordered logit:** 1-unit increase in $X$ -> $\beta$ change in odds of a higher category
+- **Poisson:** 1-unit increase in $X$ -> $\beta$ change in log expected count; $e^\beta$ multiplies expected count
+- **Nominal / multinomial logit:** 1-unit increase in $X$ -> $\beta$ change in log-odds of one category vs. reference
+
+
+
+## OLS and logit: Transformations
+
+| Form | Interpretation of $\beta_1$ |
+|---|---|
+| OLS: $Y = \beta_0 + \beta_1 X$ | 1-unit increase in $X$ -> $\beta_1$-unit change in $Y$ |
+| OLS: $\log(Y) = \beta_0 + \beta_1 X$ | 1-unit increase in $X$ -> approx. $100\beta_1\%$ change in $Y$ |
+| OLS: $Y = \beta_0 + \beta_1 \log(X)$ | 1% increase in $X$ -> approx. $\beta_1/100$-unit change in $Y$ |
+| OLS: $\log(Y) = \beta_0 + \beta_1 \log(X)$ | 1% increase in $X$ -> $\beta_1\%$ change in $Y$ |
+| Logit: $\text{logit}(p) = \beta_0 + \beta_1 X$ | 1-unit increase in $X$ -> $\beta_1$ change in log-odds |
+| Logit: $\text{logit}(p) = \beta_0 + \beta_1 \log(X)$ | 1% increase in $X$ -> approx. $\beta_1/100$ change in log-odds |
+
+
+
+
+## OLS and logit: Transformations 2
+
+| Transformation | OLS interpretation | Logit interpretation |
+|---|---|---|
+| None | 1-unit increase in $X$ -> $\beta_1$-unit change in $Y$ | 1-unit increase in $X$ -> $\beta_1$ change in log-odds |
+| Log of $Y$ | 1-unit increase in $X$ -> approx. $100\beta_1\%$ change in $Y$ | Not used for binary $Y$ |
+| Log of $X$ | 1% increase in $X$ -> approx. $\beta_1/100$-unit change in $Y$ | 1% increase in $X$ -> approx. $\beta_1/100$ change in log-odds |
+| Log of $Y$ and $X$ | 1% increase in $X$ -> $\beta_1\%$ change in $Y$ | Not used for binary $Y$ |
+
+# Authorship and license
+
+## Authorship and License
+
+- Author: Tom Hanna
+- Website: tomhanna.me
+- License: This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.

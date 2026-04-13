@@ -2,9 +2,9 @@
 library(rsconnect)
 
 # Define your file paths and title
-doc_title <- "Lecture 7: Hypothesis Testing and Confidence Intervals"
-html_file <- "C:/Users/tomha/R_Projects/pols3316_spring2026/Lectures/Lecture_7_CI_Hypothesis_Testing/Lecture_7_CI_hypothesis_testing.html" 
-source_file <- "C:/Users/tomha/R_Projects/pols3316_spring2026/Lectures/Lecture_7_CI_Hypothesis_Testing/Lecture_7_CI_hypothesis_testing.qmd" # Works with .Rmd as well
+doc_title <- "Lectures 10 and 11"
+html_file <- "C:/Users/tomha/R_Projects/pols3316_spring2026/Lectures/lecture_10_11_assumptions_of_ols_and_other_models/lecture_10_11_assumptions_of_ols_and_other_models.html" 
+source_file <- "C:/Users/tomha/R_Projects/pols3316_spring2026/Lectures/lecture_10_11_assumptions_of_ols_and_other_models/lecture_10_11_assumptions_of_ols_and_other_models.qmd" # Works with .Rmd as well
 
 # Execute the upload
 publish_result <- rpubsUpload(

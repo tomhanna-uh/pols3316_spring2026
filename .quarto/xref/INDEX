@@ -46,5 +46,9 @@
   "sample_code/ols-transformations-cheatsheet.qmd": {
     "ols-transformations-cheatsheet.html": "5b6adf05",
     "ols-transformations-cheatsheet.tex": "51f3b362"
+  },
+  "Lectures/lecture_10_11_assumptions_of_ols_and_other_models/lecture_10_11_assumptions_of_ols_and_other_models.qmd": {
+    "lecture_10_11_assumptions_of_ols_and_other_models.docx": "743933e2",
+    "lecture_10_11_assumptions_of_ols_and_other_models.html": "ed73bf7f"
   }
 }
