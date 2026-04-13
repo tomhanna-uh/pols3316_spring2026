@@ -2,7 +2,7 @@
 title: "POLS3316: Statistics for Political Scientists"
 subtitle: "Lecture 2: Variables, Units of Observation, Variable Types, Measures of Central Tendency"
 author: "Instructor: Tom Hanna, Fall 2025"
-date: January 27, 2026
+date: today
 format: 
         pdf: 
             toc: true
