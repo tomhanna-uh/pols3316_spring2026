@@ -1,4 +1,5 @@
 ---
+date: today
 title: "Lab 1 Document"
 format:
   html:

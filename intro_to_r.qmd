@@ -1,4 +1,5 @@
 ---
+date: today
 title: 'Lab 1: Getting Started with R'
 author:
 - name: Tom Hanna
