@@ -17,6 +17,15 @@ copyright:
   year: 2026
 date: today
 format: 
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                theme: assets/custom.scss
+                slide-number: true
+                preview-links: true 
+                logo: assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"        
         docx:
                 toc: true
                 number-sections: true
@@ -28,15 +37,6 @@ format:
                 code-fold: false
                 logo: assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
-        revealjs:
-                self-contained: true
-                transition: convex
-                incremental: true
-                theme: assets/custom.scss
-                slide-number: true
-                preview-links: true 
-                logo: assets/logo.png
-                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
                 toc: true
                 toc-depth: 2
@@ -532,8 +532,9 @@ ftable(UCBAdmissions)
 ## Authorship and License
 
 - Author: Tom Hanna
+
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
-- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+
 
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
 
