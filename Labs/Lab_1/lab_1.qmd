@@ -47,6 +47,17 @@ copyright:
 date: today
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Labs/Lab_1/lab_1.qmd")
+```
+
 ## Create Some Data and Organize It
 
 1. First we will add some data creating 2 **vectors** using the c() function

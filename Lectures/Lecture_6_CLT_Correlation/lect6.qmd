@@ -57,6 +57,17 @@ knitr:
       width.cutoff: 70
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/Lecture_6_CLT_Correlation/lect6.qmd")
+```
+
 ## Agenda for Today
 
 - The Law of Large Numbers (LLN)
@@ -221,7 +232,7 @@ When the two vectors point in exactly the same direction, the angle is 0 degrees
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-  <img src="../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+  <img src="`r here("assets", "creative_commons_license.png")`" alt="Creative Commons License Badge">
 </a>
 
 

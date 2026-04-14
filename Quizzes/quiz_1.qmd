@@ -47,6 +47,17 @@ copyright:
 date: today
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Quizzes/quiz_1.qmd")
+```
+
 ## Instructions
 
 Write your name here: _____________________________
