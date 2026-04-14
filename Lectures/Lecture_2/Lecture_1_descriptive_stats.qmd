@@ -13,19 +13,19 @@ format:
         revealjs:
                 self-contained: true
                 transition: convex
-                theme: ../../assets/custom.scss
+                theme: assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: ../../assets/logo.png
-                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna <img src='../../assets/logo.png' alt='UH Logo' style='height:30px;'>"
+                logo: assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna <img src='assets/logo.png' alt='UH Logo' style='height:30px;'>"
 ---
 
 ```{r}
-#| label: setup
 #| echo: false
 #| warning: false
 #| message: false
 #| eval: true
+#| label: setup
 
 library(here)
 here::i_am("Lectures/Lecture_2/Lecture_1_descriptive_stats.qmd")

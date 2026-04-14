@@ -15,7 +15,7 @@ author:
 format:
   html:
     theme: cosmo
-    style: custom.css
+    style: assets/custom.css
     axe: true
     self-contained: true
     code-fold: false
@@ -48,11 +48,11 @@ date: today
 ---
 
 ```{r}
-#| label: setup
 #| echo: false
 #| warning: false
 #| message: false
 #| eval: true
+#| label: setup
 
 library(here)
 here::i_am("intro_to_r.qmd")
