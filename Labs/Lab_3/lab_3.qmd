@@ -19,20 +19,20 @@ date: today
 format:
   html:
     theme: cosmo
-    style: custom.css
+    style: assets/custom.css
     axe: true
     self-contained: true
     code-fold: false
-    logo: ../../assets/logo.png
+    logo: assets/logo.png
     footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
   revealjs:
     self-contained: true
     transition: convex
     incremental: true
-    theme: ../../assets/custom.scss
+    theme: assets/custom.scss
     slide-number: true
     preview-links: true
-    logo: ../../assets/logo.png
+    logo: assets/logo.png
     footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
   docx:
     toc: true
@@ -58,11 +58,11 @@ knitr:
 ---
 
 ```{r}
-#| label: setup
 #| echo: false
 #| warning: false
 #| message: false
 #| eval: true
+#| label: setup
 
 library(here)
 here::i_am("Labs/Lab_3/lab_3.qmd")

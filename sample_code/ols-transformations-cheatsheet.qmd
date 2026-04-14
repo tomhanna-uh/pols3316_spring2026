@@ -19,10 +19,10 @@ date: today
 format:
         html:
                 theme: cosmo
-                style: ../assets/custom.css
+                style: assets/custom.css
                 self-contained: true
                 code-fold: false
-                logo: ../assets/logo.png
+                logo: assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         docx:
                 toc: true
@@ -36,11 +36,11 @@ format:
 ---
 
 ```{r}
-#| label: setup
 #| echo: false
 #| warning: false
 #| message: false
 #| eval: true
+#| label: setup
 
 library(here)
 here::i_am("sample_code/ols-transformations-cheatsheet.qmd")
