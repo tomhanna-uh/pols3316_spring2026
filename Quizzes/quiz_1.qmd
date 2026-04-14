@@ -1,4 +1,5 @@
 ---
+date: today
 title: "Quiz February 10 and 11"
 format: pdf
 ---
