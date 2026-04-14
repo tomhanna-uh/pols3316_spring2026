@@ -5,7 +5,7 @@ project:
 
 format:
   docx:
-    reference-doc: lab-template.docx
+    reference-doc: word_template.docx
     from: markdown-smart
     toc: true
     number-sections: true
