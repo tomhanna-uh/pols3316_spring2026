@@ -740,10 +740,12 @@ OLS gives us probabilities larger than 100% and less than 0%, greater than 1 and
 | Log of $X$ | 1% increase in $X$ -> approx. $\beta_1/100$-unit change in $Y$ | 1% increase in $X$ -> approx. $\beta_1/100$ change in log-odds |
 | Log of $Y$ and $X$ | 1% increase in $X$ -> $\beta_1\%$ change in $Y$ | Not used for binary $Y$ |
 
-# Authorship and license
-
 ## Authorship and License
 
 - Author: Tom Hanna
-- Website: tomhanna.me
-- License: This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

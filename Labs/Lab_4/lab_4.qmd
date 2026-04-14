@@ -286,13 +286,14 @@ corrplot(
 
         - Subset the cdem_indices_2014 data and produce a different plot than the example 
         - If you successfully installed the V-Dem package, select entirely different variables from V-Dem (see notes about the Codebook in Lab 3)
-        - Use the gapminder_data 
+        - Use the gapminder_data
 
+## Authorship and License
 
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
-
-
-
-
-
-
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

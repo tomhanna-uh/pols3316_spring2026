@@ -440,9 +440,6 @@ $$
 - The range is the difference between the maximum and minimum values in the data set
 - Range = Max - Min
 
-
-
-
 ## Authorship and License
 
 - Author: Tom Hanna
@@ -453,3 +450,6 @@ $$
 
 
 
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

@@ -361,12 +361,13 @@ Put your answers and your plots in a Word document or PDF and upload that to the
 
 
 
-## Authorship, License, Credits
+## Credits
 
+## Authorship and License
 
 - Author: Tom Hanna
-
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
 

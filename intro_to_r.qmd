@@ -700,20 +700,12 @@ head(cars_data)
 tail(cars_data)
 ```
 
+## Authorship and License
 
-## License
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
-
-
-                
-
-
-                
-
-
-
-
-
-
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

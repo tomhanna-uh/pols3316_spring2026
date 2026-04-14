@@ -218,4 +218,12 @@ print(column_medians_columns)
 
 We will load this data next time and do some more operations with this same data including creating row names, naming the columns with colnames() function, plotting the data, and finding the next two descriptive statistics: variance and standard deviation.
 
+## Authorship and License
 
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>
