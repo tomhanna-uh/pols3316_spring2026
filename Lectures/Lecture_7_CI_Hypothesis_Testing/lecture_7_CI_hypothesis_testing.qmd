@@ -224,17 +224,18 @@ ggplot(data.frame(x = c(-4, 15)), aes(x = x)) +
 ```
 
 
-## Authorship, License, Credits
+## Credits
 
 - [Stephen Moore](https://rpubs.com/stephenmoore56/301283) code used to simulate the Law of Large Numbers
 
 - 68-95-99 rule graphic [Source:https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2)
 
+## Authorship and License
+
 - Author: Tom Hanna
-
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
-- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
-
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](creative_commons_license.png)</a>
-
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

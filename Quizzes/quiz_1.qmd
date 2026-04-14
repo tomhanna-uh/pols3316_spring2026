@@ -63,13 +63,12 @@ What is the mode of the following numbers: 2, 4, 6, 8, 10, 2, 4, 6, 8, 10?
 
 What is the mode of the following numbers: 1, 2, 3, 4, 5?
 
+## Authorship and License
 
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
-
-
-
-
-
-
-
-
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

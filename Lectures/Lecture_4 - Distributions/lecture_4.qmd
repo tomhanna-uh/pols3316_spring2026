@@ -585,13 +585,12 @@ text(0.5, 0.22, "97.5% includes\nnegative values", col = "red", cex = 0.8)
 
 ```
 
-
-
-
 ## Authorship and License
 
 - Author: Tom Hanna
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
-- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](../assets/creative_commons_license.png)</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

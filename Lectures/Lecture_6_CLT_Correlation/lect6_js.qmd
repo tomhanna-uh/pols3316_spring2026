@@ -196,13 +196,12 @@ When the two vectors point in exactly the same direction, the angle is 0 degrees
 
 [Demonstration of Correlation vs. Covariance](https://tom-hanna.org/teaching/teaching/stats-and-research-design/pols-3316-statistics-for-political-scientists-interactive-lecture-module/)
 
-
-
-
 ## Authorship and License
 
 - Author: Tom Hanna
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
-- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](../assets/creative_commons_license.png)</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>

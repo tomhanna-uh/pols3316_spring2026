@@ -483,4 +483,12 @@ A Word or PDF document titled something like `Lab_8_Lastname_Firstname` that con
    - Part 2: Berkeley admissions tables, chi-square results, and interpretation
    - Part 3: Brief description and initial summary (descriptives, crosstab, or simple regression) of your own project data
 
+## Authorship and License
 
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
+</a>
