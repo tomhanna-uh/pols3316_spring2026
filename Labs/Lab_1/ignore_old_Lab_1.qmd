@@ -1,11 +1,54 @@
 ---
 date: today
 title: 'Lab 1: Getting Started'
-author: "POLS 3316, Spring 2026, University of Houston, Instructor: Tom Hanna"
+author:
+- name: Tom Hanna
+  id: th
+  orcid: 0000-0002-8054-0335
+  email: tlhanna@central.uh.edu
+  url: tomhanna.me
+  affiliation:
+  - name: University of Houston
+    city: Houston
+    state: TX
+    url: uh.edu/class/political-science/
 output:
   html_document:
     df_print: paged
   pdf_document: default
+license: CC BY-NC-SA 4.0
+copyright:
+  holder: Tom Hanna
+  year: 2026
+date: today
+format:
+  html:
+    theme: cosmo
+    style: custom.css
+    axe: true
+    self-contained: true
+    code-fold: false
+    logo: ../../assets/logo.png
+    footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+  revealjs:
+    self-contained: true
+    transition: convex
+    incremental: true
+    theme: ../../assets/custom.scss
+    slide-number: true
+    preview-links: true
+    logo: ../../assets/logo.png
+    footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+  docx:
+    toc: true
+    number-sections: true
+    reference-doc: ../../lab-template.docx
+  pdf:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    fig_caption: true
 ---
 
 ```{r}

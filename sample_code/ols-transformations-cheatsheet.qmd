@@ -1,18 +1,18 @@
 ---
 title: "OLS Transformations Cheatsheet"
-author: 
-  - name: Tom Hanna
-    id: th
-    orcid: 0000-0002-8054-0335
-    email: tlhanna@central.uh.edu
-    url: tomhanna.me
-    affiliation: 
-      - name: University of Houston
-        city: Houston
-        state: TX
-        url: uh.edu/class/political-science/
+author:
+- name: Tom Hanna
+  id: th
+  orcid: 0000-0002-8054-0335
+  email: tlhanna@central.uh.edu
+  url: tomhanna.me
+  affiliation:
+  - name: University of Houston
+    city: Houston
+    state: TX
+    url: uh.edu/class/political-science/
 license: CC BY-NC-SA 4.0
-copyright: 
+copyright:
   holder: Tom Hanna
   year: 2026
 date: today
@@ -27,7 +27,6 @@ format:
         docx:
                 toc: true
                 number-sections: true
-                reference-doc: ../../lab-template.docx
         pdf: 
                 toc: true
                 toc-depth: 2
