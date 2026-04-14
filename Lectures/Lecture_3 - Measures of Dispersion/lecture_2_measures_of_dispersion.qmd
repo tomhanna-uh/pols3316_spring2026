@@ -11,22 +11,33 @@ format:
             fig_caption: true
         html:
                 theme: cosmo
-                style: custom.css
+                style: ../../assets/custom.css
                 axe: true
                 self-contained: true
                 code-fold: false
-                logo: ../logo.png
+                logo: ../../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         revealjs:
                 self-contained: true
                 transition: convex
                 incremental: true
-                theme: ../assets/custom.scss
+                theme: ../../assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: ../assets/logo.png
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/Lecture_3 - Measures of Dispersion/lecture_2_measures_of_dispersion.qmd")
+```
 
 ## Last class
 
@@ -120,7 +131,7 @@ format:
 
 <!-- Example: -->
 
-<!-- ![Negatively skewed, Normal, and Positively Skewed distributions](skewed-curves.png) -->
+<!-- ![Negatively skewed, Normal, and Positively Skewed distributions](`r here("assets", "skewed-curves.png")`) -->
 
 <!-- ## Scattered around the mean -->
 
@@ -419,7 +430,7 @@ $$
 - Author: Tom Hanna
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](../assets/creative_commons_license.png)</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
 
 
 

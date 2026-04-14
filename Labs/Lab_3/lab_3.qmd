@@ -36,6 +36,17 @@ knitr:
       width.cutoff: 70
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Labs/Lab_3/lab_3.qmd")
+```
+
 
 ## Getting ready
 

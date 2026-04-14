@@ -21,10 +21,10 @@ format:
                 self-contained: true
                 transition: convex
                 incremental: true
-                theme: ../assets/custom.scss
+                theme: ../../assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: ../assets/logo.png
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         docx:
                 toc: true
@@ -32,11 +32,11 @@ format:
                 reference-doc: ../../lab-template.docx
         html:
                 theme: cosmo
-                style: custom.css
+                style: ../../assets/custom.css
                 axe: true
                 self-contained: true
                 code-fold: false
-                logo: ../logo.png
+                logo: ../../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
                 toc: true
@@ -45,6 +45,17 @@ format:
                 number-sections: true
                 fig_caption: true
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/lecture_10_11_assumptions_of_ols_and_other_models/lecture_10_11_assumptions_of_ols_and_other_models.qmd")
+```
 
 # Agenda and announcements
 
@@ -122,7 +133,7 @@ format:
 
 ##
 
-![Residual plot showing a U-shaped pattern, indicating nonlinearity](residual_plot_nonlinearity.jpg){fig-alt="Residual plot showing a U-shaped pattern, indicating nonlinearity"}
+![Residual plot showing a U-shaped pattern, indicating nonlinearity](`r here("assets", "residual_plot_nonlinearity.jpg")`){fig-alt="Residual plot showing a U-shaped pattern, indicating nonlinearity"}
 
 ## What to do about it
 
@@ -154,7 +165,7 @@ format:
 
 ## Non-independence - Autocorrelation
 
-![Residual plot showing a clear pattern over time, indicating autocorrelation](non-independence.png){fig-alt="Residual plot showing a clear pattern over time, indicating autocorrelation"}
+![Residual plot showing a clear pattern over time, indicating autocorrelation](`r here("assets", "non-independence.png")`){fig-alt="Residual plot showing a clear pattern over time, indicating autocorrelation"}
 
 ## Why it matters
 
@@ -217,7 +228,7 @@ format:
 
 ## Visual intuition
 
-![Residual plot showing a fanning pattern, indicating heteroskedasticity](homoskedasticity.png){fig-alt="Residual plot showing a fanning pattern, indicating heteroskedasticity"}
+![Residual plot showing a fanning pattern, indicating heteroskedasticity](`r here("assets", "homoskedasticity.png")`){fig-alt="Residual plot showing a fanning pattern, indicating heteroskedasticity"}
 
 ## Why it matters
 
@@ -248,7 +259,7 @@ format:
 
 ## Visually it means
 
-![Normality of residuals around the OLS regression line demonstrated with normal curves at several points](normality.jpg){fig-alt="Normality of residuals around the OLS regression line demonstrated with normal curves at several points"}
+![Normality of residuals around the OLS regression line demonstrated with normal curves at several points](`r here("assets", "normality.jpg")`){fig-alt="Normality of residuals around the OLS regression line demonstrated with normal curves at several points"}
 
 
 
@@ -329,7 +340,7 @@ mtext("Code will be provided in Labs Module - this would add a lot of profession
 
 ## Visual Example of Multicollinearity
 
-![Perfect multicollinearity example: two good predictors compared to two highly correlated](multicollinearity.png){fig-alt="Perfect multicollinearity example: two predictors perfectly correlated"}
+![Perfect multicollinearity example: two good predictors compared to two highly correlated](`r here("assets", "multicollinearity.png")`){fig-alt="Perfect multicollinearity example: two predictors perfectly correlated"}
 
 
 ## Why it matters
@@ -359,7 +370,7 @@ mtext("Code will be provided in Labs Module - this would add a lot of profession
 
 ## Examples of non-continuous outcomes
 
-![Examples of continuous vs binary and count](ols_assumption_7_1.png){fig-alt="Examples of different outcome types: binary, count"}
+![Examples of continuous vs binary and count](`r here("assets", "ols_assumption_7_1.png")`){fig-alt="Examples of different outcome types: binary, count"}
 
 
 
@@ -380,7 +391,7 @@ mtext("Code will be provided in Labs Module - this would add a lot of profession
 
 ## From OLS to MLE
 
-![OLS line through binary data showing impossible predictions, contrasted with logistic S-curve](ols_to_MLE.png){fig-alt="OLS line through binary data showing impossible predictions, contrasted with logistic S-curve"}
+![OLS line through binary data showing impossible predictions, contrasted with logistic S-curve](`r here("assets", "ols_to_MLE.png")`){fig-alt="OLS line through binary data showing impossible predictions, contrasted with logistic S-curve"}
 
 # Which assumptions matter most?
 
@@ -435,7 +446,7 @@ mtext("Code will be provided in Labs Module - this would add a lot of profession
 
 
 
-(Open ols_binary_fails.mp4)
+(Open `r here("assets", "ols_binary_fails.mp4")`)
 
 ## Commentary
 
@@ -443,7 +454,7 @@ OLS gives us probabilities larger than 100% and less than 0%, greater than 1 and
 
 ## Video 2
 
-(Open Logit Saves the Day video logistic_regression_saves_the_day.mp4)
+(Open Logit Saves the Day video `r here("assets", "logit_saves_the_day.mp4")`)
 
 
 

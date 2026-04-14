@@ -4,6 +4,17 @@ title: "Lab 2 Document"
 format: docx
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Labs/Lab_2/lab_2.qmd")
+```
+
 ## Getting ready
 
 First, be sure you are in the project for the class github repository. You can check this by looking at the top of the RStudio window, it should show the name of the project as "pols3316_spring2026". If not, you can open the project by going to `File > Open Project` and selecting the `pols3316_spring2026.Rproj` file in the folder where you cloned the repository or by going to `File > Recent Projects` and selecting it from the list.

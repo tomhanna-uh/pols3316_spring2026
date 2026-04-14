@@ -23,20 +23,20 @@ format:
                 reference-doc: ../../lab-template.docx
         html:
                 theme: cosmo
-                style: custom.css
+                style: ../../assets/custom.css
                 axe: true
                 self-contained: true
                 code-fold: false
-                logo: ../logo.png
+                logo: ../../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         revealjs:
                 self-contained: true
                 transition: convex
                 incremental: true
-                theme: ../assets/custom.scss
+                theme: ../../assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: ../assets/logo.png
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
                 toc: true
@@ -45,6 +45,17 @@ format:
                 number-sections: true
                 fig_caption: true
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/Lecture_8_Chi_Square/Lecture_8_Chi_Square.qmd")
+```
 
 # Agenda and Announcements
 
@@ -74,7 +85,7 @@ format:
 
 ## The 68-95-99.7 Rule
 
-![68-95-99.7 rule](68-95-997.png)
+![68-95-99.7 rule](`r here("assets", "68-95-997.png")`)
 
 
 ## What is a Z-Score? (cont)
@@ -525,5 +536,5 @@ ftable(UCBAdmissions)
 
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
 
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](creative_commons_license.png)</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
 

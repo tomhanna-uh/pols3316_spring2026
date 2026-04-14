@@ -23,15 +23,15 @@ format:
                 incremental: true
                 slide-number: true
                 preview-links: true 
-                logo: ../assets/logo.png
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         html:
                 theme: cosmo
-                style: custom.css
+                style: ../../assets/custom.css
                 axe: true
                 self-contained: true
                 code-fold: false
-                logo: ../logo.png
+                logo: ../../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
             toc: true
@@ -40,6 +40,17 @@ format:
             number-sections: true
             fig_caption: true
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("sample_code/saved code/saved stuff.qmd")
+```
         
 
 
@@ -320,4 +331,4 @@ cat("The mean of twenty five thousand flips is", k, "\n")
 
 - Want to do some polling? This is where margin of error comes from: 
         
-        ![margin of error](margin-of-error.png)
+        ![margin of error](`r here("assets", "margin-of-error.png")`)

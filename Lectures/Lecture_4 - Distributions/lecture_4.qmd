@@ -5,11 +5,11 @@ author: "POLS3316, Instructor: Tom Hanna, Spring 2025, University of Houston"
 format: 
         html:
                 theme: cosmo
-                style: custom.css
+                style: ../../assets/custom.css
                 axe: true
                 self-contained: true
                 code-fold: false
-                logo: ../logo.png
+                logo: ../../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
             toc: true
@@ -21,12 +21,23 @@ format:
                 self-contained: true
                 transition: convex
                 incremental: true
-                theme: ../assets/custom.scss
+                theme: ../../assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: ../assets/logo.png
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/Lecture_4 - Distributions/lecture_4.qmd")
+```
 
 # Data Assumptions
 
@@ -593,5 +604,5 @@ text(0.5, 0.22, "97.5% includes\nnegative values", col = "red", cex = 0.8)
 - Author: Tom Hanna
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](../assets/creative_commons_license.png)</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
 

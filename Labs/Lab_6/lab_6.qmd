@@ -36,6 +36,17 @@ knitr:
       width.cutoff: 70
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Labs/Lab_6/lab_6.qmd")
+```
+
 ## Getting ready
 
 ### Proper project
@@ -338,6 +349,6 @@ Put your answers and your plots in a Word document or PDF and upload that to the
 
 - License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
 
-<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](creative_commons_license.png)</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
 
 

@@ -4,6 +4,17 @@ title: "Quiz February 10 and 11"
 format: pdf
 ---
 
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Quizzes/quiz_1.qmd")
+```
+
 ## Instructions
 
 Write your name here: _____________________________
