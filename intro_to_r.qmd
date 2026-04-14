@@ -1,10 +1,62 @@
 ---
+date: today
 title: 'Lab 1: Getting Started with R'
-author: "POLS 3316, FALL 2023, University of Houston, Instructor: Tom Hanna"
-format: 
-        revealjs:
-                self-contained: true
+author:
+- name: Tom Hanna
+  id: th
+  orcid: 0000-0002-8054-0335
+  email: tlhanna@central.uh.edu
+  url: tomhanna.me
+  affiliation:
+  - name: University of Houston
+    city: Houston
+    state: TX
+    url: uh.edu/class/political-science/
+format:
+  html:
+    theme: cosmo
+    style: custom.css
+    axe: true
+    self-contained: true
+    code-fold: false
+    logo: assets/logo.png
+    footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+  revealjs:
+    self-contained: true
+    transition: convex
+    incremental: true
+    theme: assets/custom.scss
+    slide-number: true
+    preview-links: true
+    logo: assets/logo.png
+    footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+  docx:
+    toc: true
+    number-sections: true
+    reference-doc: lab-template.docx
+  pdf:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    fig_caption: true
+license: CC BY-NC-SA 4.0
+copyright:
+  holder: Tom Hanna
+  year: 2026
+date: today
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("intro_to_r.qmd")
+```
 
 ## We're going to start by loading some data!
 
@@ -82,7 +134,7 @@ With the working directory set, we're ready to actually load the data. The next 
 + Create a new *object* called "cars_data". 
 + Assign something to the object using the *assignment operator*
 
-![assignment operator](assets/assignment_operator.png)
+![assignment operator](`r here("assets", "assignment_operator.png")`)
 
 (Image from: https://shansabri.github.io/post/post1/)
 

@@ -1,18 +1,18 @@
 ---
 title: "Lecture 8: Hypothesis Testing: Z-score and Chi-Square"
-author: 
-  - name: Tom Hanna
-    id: th
-    orcid: 0000-0002-8054-0335
-    email: tlhanna@central.uh.edu
-    url: tomhanna.me
-    affiliation: 
-      - name: University of Houston
-        city: Houston
-        state: TX
-        url: uh.edu/class/political-science/
+author:
+- name: Tom Hanna
+  id: th
+  orcid: 0000-0002-8054-0335
+  email: tlhanna@central.uh.edu
+  url: tomhanna.me
+  affiliation:
+  - name: University of Houston
+    city: Houston
+    state: TX
+    url: uh.edu/class/political-science/
 license: CC BY-NC-SA 4.0
-copyright: 
+copyright:
   holder: Tom Hanna
   year: 2026
 date: today
@@ -20,23 +20,22 @@ format:
         docx:
                 toc: true
                 number-sections: true
-                reference-doc: ../../lab-template.docx
         html:
                 theme: cosmo
-                style: custom.css
+                style: ../../assets/custom.css
                 axe: true
                 self-contained: true
                 code-fold: false
-                logo: ../logo.png
+                logo: ../../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         revealjs:
                 self-contained: true
                 transition: convex
                 incremental: true
-                theme: ../assets/custom.scss
+                theme: ../../assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: ../assets/logo.png
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
                 toc: true
@@ -45,6 +44,17 @@ format:
                 number-sections: true
                 fig_caption: true
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/Lecture_8_Chi_Square/Lecture_8_Chi_Square.qmd")
+```
 
 # Agenda and Announcements
 
@@ -74,7 +84,7 @@ format:
 
 ## The 68-95-99.7 Rule
 
-![68-95-99.7 rule](68-95-997.png)
+![68-95-99.7 rule](`r here("assets", "68-95-997.png")`)
 
 
 ## What is a Z-Score? (cont)
@@ -525,6 +535,7 @@ ftable(UCBAdmissions)
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
 - License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
-</a>
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
+
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
+

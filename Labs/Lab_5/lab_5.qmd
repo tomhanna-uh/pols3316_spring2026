@@ -1,28 +1,49 @@
 ---
 title: "Lab 5: Z-Tests, Crosstabs, and the 1973 Berkeley Example"
 author:
-  - name: Tom Hanna
-    id: th
-    orcid: 0000-0002-8054-0335
-    email: tlhanna@central.uh.edu
-    url: tomhanna.me
-    affiliation:
-      - name: University of Houston
-        city: Houston
-        state: TX
-        url: uh.edu/class/political-science/
+- name: Tom Hanna
+  id: th
+  orcid: 0000-0002-8054-0335
+  email: tlhanna@central.uh.edu
+  url: tomhanna.me
+  affiliation:
+  - name: University of Houston
+    city: Houston
+    state: TX
+    url: uh.edu/class/political-science/
 license: CC BY-NC-SA 4.0
 copyright:
   holder: Tom Hanna
   year: 2026
 date: today
 format:
+  html:
+    theme: cosmo
+    style: custom.css
+    axe: true
+    self-contained: true
+    code-fold: false
+    logo: ../../assets/logo.png
+    footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+  revealjs:
+    self-contained: true
+    transition: convex
+    incremental: true
+    theme: ../../assets/custom.scss
+    slide-number: true
+    preview-links: true
+    logo: ../../assets/logo.png
+    footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
   docx:
     toc: true
-    toc-depth: 2
     number-sections: true
-    highlight-style: github
-    page-width: 6.5
+    reference-doc: ../../lab-template.docx
+  pdf:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    fig_caption: true
 from: markdown-smart
 execute:
   echo: true
@@ -35,6 +56,17 @@ knitr:
     tidy.opts:
       width.cutoff: 70
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Labs/Lab_5/lab_5.qmd")
+```
 
 ## Getting ready
 

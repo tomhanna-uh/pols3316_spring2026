@@ -2,7 +2,7 @@
 title: "POLS3316: Statistics for Political Scientists"
 subtitle: "Lecture 2: Variables, Units of Observation, Variable Types, Measures of Central Tendency"
 author: "Instructor: Tom Hanna, Fall 2025"
-date: January 27, 2026
+date: today
 format: 
         pdf: 
             toc: true
@@ -13,12 +13,23 @@ format:
         revealjs:
                 self-contained: true
                 transition: convex
-                theme: ../assets/custom.scss
+                theme: ../../assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: logo.png
-                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna <img src='logo.png' alt='UH Logo' style='height:30px;'>" 
+                logo: ../../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna <img src='../../assets/logo.png' alt='UH Logo' style='height:30px;'>"
 ---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+
+library(here)
+here::i_am("Lectures/Lecture_2/Lecture_1_descriptive_stats.qmd")
+```
 
 
 
@@ -444,7 +455,7 @@ Answer:
 
 Example:
 
-![Negatively skewed, Normal, and Positively Skewed distributions](skewed-curves.png)
+![Negatively skewed, Normal, and Positively Skewed distributions](`r here("assets", "skewed-curves.png")`)
 
 
 
@@ -464,6 +475,4 @@ skewed distribution source: <a href="https://statisticsbyjim.com/">Statistics by
 - Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
 - License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
 
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-  <img src="../../assets/creative_commons_license.png" alt="Creative Commons License Badge">
-</a>
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
