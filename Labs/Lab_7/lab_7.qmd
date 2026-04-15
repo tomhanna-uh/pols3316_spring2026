@@ -20,7 +20,6 @@ format:
   docx:
     toc: true
     number-sections: true
-    reference-doc: ../../lab-template.docx
   html:
     theme: cosmo
     style: assets/custom.css
@@ -181,6 +180,20 @@ $GDP_{per\_capita} = \beta_0 + \beta_1 \cdot liberal\_democracy + \beta_2 \cdot 
 Zimbabwe is the reference country, so its equation is just:
 
 $GDP_{per\_capita} = \beta_0 + \beta_1 \cdot liberal\_democracy$
+
+## Assignment
+
+For the assignment, you will run a regression analysis for two variables in your data set. First, you need to decide which will be your X (explanatory, indepedent, or causal variable) and which will be your Y (outcome, dependent, or effect variable). You should have done this in a previous lab when you wrote a paragraph about your variables. Then, you will run a simple OLS regression with just those two variables. Next, you will add a control variable **if you have one** to the model and run it again. 
+
+You should create tables for each model in Word. 
+
+You should also write out the equations for each model in Word.
+
+You should describe the effect of X on Y in the first model. You can use this as a template: "For each unit increase in [X], [Y] increases by [the value of the coefficient] for [X] in model 1, holding all else constant." The bracketed items need to actually match your variabe names and results.
+
+Optional but encouraged!: 
+
+Describe how the effect of X on Y changes when you add the control variable in model 2. You can use this as a template: "When we add the control variable to the model, the effect of X on Y changes to [describe how it changes]. This suggests that [describe what this means for your theory]."
 
 
 
