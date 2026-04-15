@@ -1,5 +1,5 @@
 ---
-title: "Lab 7: T-Tests and Plotting 2 or more variables"
+title: "Lab 7: OLS Models"
 author:
 - name: Tom Hanna
   id: th
