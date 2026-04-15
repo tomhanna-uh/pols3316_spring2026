@@ -1,0 +1,201 @@
+---
+title: "Lab 7: T-Tests and Plotting 2 or more variables"
+author:
+- name: Tom Hanna
+  id: th
+  orcid: 0000-0002-8054-0335
+  email: tlhanna@central.uh.edu
+  url: tomhanna.me
+  affiliation:
+  - name: University of Houston
+    city: Houston
+    state: TX
+    url: uh.edu/class/political-science/
+license: CC BY-NC-SA 4.0
+copyright:
+  holder: Tom Hanna
+  year: 2026
+date: today
+format:
+  docx:
+    toc: true
+    number-sections: true
+    reference-doc: ../../lab-template.docx
+  html:
+    theme: cosmo
+    style: assets/custom.css
+    axe: true
+    self-contained: true
+    code-fold: false
+    logo: assets/logo.png
+    footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+  revealjs:
+    self-contained: true
+    transition: convex
+    incremental: true
+    theme: assets/custom.scss
+    slide-number: true
+    preview-links: true
+    logo: assets/logo.png
+    footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+  pdf:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    fig_caption: true
+from: markdown-smart
+execute:
+  echo: true
+  eval: false
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    tidy: true
+    tidy.opts:
+      width.cutoff: 70
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: true
+#| label: setup
+
+library(here)
+here::i_am("Labs/Lab_7/lab_7.qmd")
+```
+
+## Getting ready
+
+### Proper project
+
+Be sure you are in the project for the class github repository. You can check this by looking at the top of the RStudio window, it should show the name of the project as `"pols3316_spring2026"`. If not, you can open the project by going to `File > Open Project` and selecting the `pols3316_spring2026.Rproj` file in the folder where you cloned the repository or by going to `File > Recent Projects` and selecting it from the list.
+
+### Clear the console and environment
+
+Next, we are going to clear the console and remove all objects from the environment.
+
+To clear the console, you can use the shortcut `Ctrl + L` (Windows/Linux) or `Cmd + L` (Mac).
+
+To clear the environment, you can use the broom icon in the upper right or use following command in R by typing it in the console:
+
+```r
+# this command erases all objects from the environment
+
+rm(list = ls())
+
+```
+
+## Git Pull
+
+Last, we are going to do a "Git Pull" to update the local repository with the latest material from the class github repository on GitHub.
+
+You can do this by going to the "Git" tab in the upper right pane of RStudio and clicking the "Pull" button or by using the following command in R by typing it in the console:
+
+```
+# this executes a git pull
+
+system("git pull")
+``` 
+
+
+Now, let's create a new R script file for this lab. You can do this by going to File > New File > R Script. Save the new file in your My_Labs folder with the name lab_8.R. (If you named your folder something different, just save it there.)
+
+
+## Load some practice data
+
+We will use the small vdem data set
+
+```
+data_vdem <- read.csv(here("data", "vdemdata.csv"))
+```
+
+## Simple OLS regression, one variable
+
+```
+# Create the model object
+
+model1 <- lm(gdp_per_capita ~ liberal_democracy, data = data_vdem)
+
+# show a summary of the model
+
+summary(model1)
+
+# create a stargazer table to copy to Word
+library(stargazer)
+stargazer(model1, type = "text", title = "OLS Regression of GDP")
+
+
+```
+
+For practice, what is the equation for a line you would make from this?
+
+## Two variables - X plus one control variable (X2)
+
+```
+model2 <- lm(gdp_per_capita ~ liberal_democracy + exports, data = data_vdem)
+
+# show the summary
+summary(model2)
+
+# create stargazer table for publication
+
+stargazer(model2, type = "text", title = "OLS Regression of GDP with Control Variable")
+
+
+```
+
+For practice, try turning this into an equation. Hint: you have to add the coefficient times X2 (exports) to the right hand side of the equation from model 1.
+
+
+## Two variables, one categorical
+
+First, we have to add a categorical variable to the data. We will use the "country" variable and turn it into a "factor".
+
+```
+# we have to turn the country variable into a factor
+data_vdem$country <- as.factor(data_vdem$country)
+
+# now we can run the model with the categorical variable
+model3 <- lm(gdp_per_capita ~ liberal_democracy + country, data = data_vdem)
+
+# show the summary
+summary(model3)
+
+# create stargazer table for publication
+stargazer(model3, type = "text", title = "OLS Regression of GDP with Categorical Variable")
+
+```
+
+We actually get 178 coefficients for the country variable because there are 179 countries in the data and R automatically drops one of them as the "reference category". The coefficients for the country variable represent the difference in GDP per capita between each country and the reference category.
+
+Since each country except the one we are interest in has a value of 0, all the coefficients drop except the one we are interested in and we get a clean equation for each country such as:
+
+For United States:
+
+$GDP_{per\_capita} = \beta_0 + \beta_1 \cdot liberal\_democracy + \beta_2 \cdot country\_United\_States$
+
+Zimbabwe is the reference country, so its equation is just:
+
+$GDP_{per\_capita} = \beta_0 + \beta_1 \cdot liberal\_democracy$
+
+
+
+
+# Credits
+
+## Authorship and License
+
+- Author: Tom Hanna
+- Website: <a href="https://tom-hanna.org/">tomhanna.me</a>
+- License: This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+
+- License: This work is licensed under a <a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</>
+
+<a href= "http://creativecommons.org/licenses/by-nc-sa/4.0/">![Creative Commons License](`r here("assets", "creative_commons_license.png")`)</a>
+
+
+
