@@ -19,11 +19,21 @@ date: today
 format:
         html:
                 theme: cosmo
-                style: assets/custom.css
+                style: ../custom.scss
+                axe: true
                 self-contained: true
                 code-fold: false
-                logo: assets/logo.png
+                logo: ../assets/logo.png
                 footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                slide-number: true
+                preview-links: true
+                theme: ../custom.scss
+                logo: ../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         docx:
                 toc: true
                 number-sections: true
