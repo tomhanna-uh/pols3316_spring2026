@@ -16,27 +16,27 @@ copyright:
   holder: Tom Hanna
   year: 2026
 date: today
-format: 
+format:         
+        html:
+                theme: cosmo
+                style: ../../custom.scss
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../../assets/logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         revealjs:
                 self-contained: true
                 transition: convex
                 incremental: true
-                theme: assets/custom.scss
                 slide-number: true
                 preview-links: true 
-                logo: assets/logo.png
+                theme: ../../custom.scss
+                logo: ../../assets/logo.png
                 footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
         docx:
                 toc: true
                 number-sections: true
-        html:
-                theme: cosmo
-                style: assets/custom.css
-                axe: true
-                self-contained: true
-                code-fold: false
-                logo: assets/logo.png
-                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
         pdf: 
                 toc: true
                 toc-depth: 2
@@ -53,7 +53,7 @@ format:
 #| label: setup
 
 library(here)
-here::i_am("Lectures/lecture_10_11_assumptions_of_ols_and_other_models/lecture_10_11_assumptions_of_ols_and_other_models.qmd")
+# here::i_am("Lectures/lecture_10_11_assumptions_of_ols_and_other_models/lecture_10_11_assumptions_of_ols_and_other_models.qmd")
 ```
 
 # Agenda and announcements
