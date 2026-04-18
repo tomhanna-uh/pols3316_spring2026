@@ -16,35 +16,34 @@ copyright:
   holder: Tom Hanna
   year: 2026
 date: today
-format:
-  html:
-    theme: cosmo
-    style: assets/custom.css
-    axe: true
-    self-contained: true
-    code-fold: false
-    logo: assets/logo.png
-    footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
-  revealjs:
-    self-contained: true
-    transition: convex
-    incremental: true
-    theme: assets/custom.scss
-    slide-number: true
-    preview-links: true
-    logo: assets/logo.png
-    footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
-  docx:
-    toc: true
-    number-sections: true
-    reference-doc: ../../lab-template.docx
-  pdf:
-    toc: true
-    toc-depth: 2
-    toc-location: left
-    number-sections: true
-    fig_caption: true
-from: markdown-smart
+format: 
+        docx:
+                toc: true
+                number-sections: true
+                reference-doc: ../../lab-template.docx
+        revealjs:
+                self-contained: true
+                transition: convex
+                incremental: true
+                slide-number: true
+                preview-links: true 
+                theme: ../../custom.scss
+                logo: ../../assets/logo.png
+                footer: "UH POLS3316, Spring 2026, Instructor: Tom Hanna"
+        html:
+                theme: cosmo
+                style: ../../custom.scss
+                axe: true
+                self-contained: true
+                code-fold: false
+                logo: ../../assets/logo.png
+                footer: "POLS3316, Spring 2026, Instructor: Tom Hanna"
+        pdf: 
+                toc: true
+                toc-depth: 2
+                toc-location: left
+                number-sections: true
+                fig_caption: true
 execute:
   echo: true
   eval: false
